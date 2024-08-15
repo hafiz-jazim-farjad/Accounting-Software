@@ -22,7 +22,6 @@ export function LoginComponent() {
 export default function App() {
   return (
     <Routes>
-      {/* jazim */}
       <Route path="/" element={<LoginComponent />} />
       <Route path="/Login" element={<Login />} />
       {/* <Route path="/SignUp" element={<SignUp />} /> */}
@@ -30,7 +29,7 @@ export default function App() {
 
       <Route path="/Vendor" element={<Vendor />} />
       <Route path="/SeeVenders" element={<SeeVenders />} />
-      
+
       <Route path="/Customer" element={<Customer />} />
       <Route path="/SeeCustomers" element={<SeeCustomers />} />
 
