@@ -34,13 +34,13 @@ function Customer() {
     const formatDateTime = () => {
         const forDayInWords = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const forMonthInWords = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        
+
         const fullDate = new Date();
         const day = forDayInWords[fullDate.getDay()];
         const date = fullDate.getDate();
         const month = forMonthInWords[fullDate.getMonth()];
         const year = fullDate.getFullYear();
-        
+
         return `${day}, ${month}-${date}-${year}`;
     };
 
@@ -166,7 +166,11 @@ function Customer() {
                         <div className="formGroup">
                             <input type="text" name="additionalNote" id="additionalNote" placeholder="Additional Note About the Customer" value={AdditionalNote} onChange={(e) => SetAdditionalNote(e.target.value)} />
                         </div>
-                        <button type="button" id="submit" onClick={AddCustomer}>Add Customer</button>
+                        <div style={{ display: 'flex:', justifyContent: 'center', alignItems: 'center', width: '100% important' }}>
+
+                            <button type="submit" id="submit" onClick={AddCustomer} style={{backgroundColor:'orange' , width:'150px' , color:'white'}}>Add Customer</button>
+                            <p>f</p> <Link to="/SeeCustomers" ><button type='submit'  style={{backgroundColor:'orange' , width:'150px' , color:'white'}}> See Customers</button></Link>
+                        </div>
                     </main>
                 </div>
             </div>
