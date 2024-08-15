@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../App.css'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect , createContext } from 'react'
 import { auth } from '../../Firebase/Firebase'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, query, collection, getDocs, deleteDoc, updateDoc } from 'firebase/firestore';
@@ -12,6 +12,7 @@ export default function SeeVenders() {
 
     const [name, setName] = useState('')
     const [Vender, SetVenders] = useState([])
+
 
     const VenderRandomCode = Math.floor(Math.random() * 100000)
     const VenderGlCode = Math.floor(Math.random() * 100000)
@@ -197,273 +198,7 @@ export default function SeeVenders() {
                         } 
                     })
                 }else if(result.dismiss === Swal.DismissReason.cancel) {
-                    Swal.fire({
-                        title: 'Are you Sure ?',
-                        text: 'You Want to Edit This Vender',
-                        icon: 'success',
-                        confirmButtonText: 'Close',
-                        confirmButtonColor: '#3085d6',
-                        showCloseButton: true,
-                        showConfirmButton: true,
-                        showCancelButton: true,
-                        confirmButtonText: 'Yes',
-                        cancelButtonText: 'No',
-                        confirmButtonColor: 'ref',
-                        cancelButtonColor: 'orange'
-                    }).then(async(EditResult)=>{
-                        if(EditResult.isConfirmed){
-
-                             await Swal.fire({
-                                title: "Select Your Updating Field",
-                                input: "select",
-                                inputOptions: {
-                                  Venders: {
-                                    Name:'Name',
-                                    Email:'Email',
-                                    Contact:'Contact',
-                                    ContactPerson:'ContactPerson',
-                                    Cnic:'Cnic',
-                                    NtnNumber:'NtnNumber',
-                                    StnNumber:'StnNumber',
-                                    Adress:'Adress',
-                                    AdditionalInfo:'AdditionalInfo'
-                                  },
-                                },
-                                inputPlaceholder: "Select a Field that you want to edit",
-                                showCancelButton: true,
-                                inputValidator: (value) => {
-                                  return new Promise(async(resolve) => {
-                                    if (value === "Name") {
-                                        const { value: firstname } = await Swal.fire({
-                                            input: 'text',
-                                            inputLabel: 'Update Vender Name',
-                                            inputPlaceholder: 'Enter New Vender Name Here',
-                                            inputAttributes: {
-                                              'aria-label': 'Enter New Vender Name Here'
-                                            },
-                                            showCancelButton: true
-                                          })
-                                          if (firstname) {
-                                            const postRef = doc(db, "Venders", rowId);
-                                            const postSnapshot = await getDoc(postRef);
-                                            const postData = postSnapshot.data();
-                                      
-                                            try {
-                                              await updateDoc(postRef, {
-                                                Name: firstname,
-                                              });
-                                              window.location.reload()
-                                              // Optionally, update the UI to reflect the changes
-                                            } catch (error) {
-                                              console.error("Error updating document: ", error);
-                                            }
-                                          }
-                                    }else if(value === "Email"){
-                                        const { value: email } = await Swal.fire({
-                                            input: 'text',
-                                            inputLabel: 'Update Vender Email',
-                                            inputPlaceholder: 'Enter New Vender Email Here',
-                                            inputAttributes: {
-                                              'aria-label': 'Enter New Vender Email Here'
-                                            },
-                                            showCancelButton: true
-                                          })
-                                          if (email) {
-                                            const postRef = doc(db, "Venders", rowId);
-                                            const postSnapshot = await getDoc(postRef);
-                                            const postData = postSnapshot.data();
-                                      
-                                            try {
-                                              await updateDoc(postRef, {
-                                                Email: email,
-                                              });
-                                              window.location.reload()
-                                              // Optionally, update the UI to reflect the changes
-                                            } catch (error) {
-                                              console.error("Error updating document: ", error);
-                                            }
-                                          }
-                                    }else if(value === "Contact"){
-                                        const { value: Contact } = await Swal.fire({
-                                            input: 'text',
-                                            inputLabel: 'Update Vender Contact1',
-                                            inputPlaceholder: 'Enter New Vender Contact1 Here',
-                                            inputAttributes: {
-                                              'aria-label': 'Enter New Vender Contact1 Here'
-                                            },
-                                            showCancelButton: true
-                                          })
-                                          if (Contact) {
-                                            const postRef = doc(db, "Venders", rowId);
-                                            const postSnapshot = await getDoc(postRef);
-                                            const postData = postSnapshot.data();
-                                      
-                                            try {
-                                              await updateDoc(postRef, {
-                                                Contact: Contact,
-                                              });
-                                              window.location.reload()
-                                              // Optionally, update the UI to reflect the changes
-                                            } catch (error) {
-                                              console.error("Error updating document: ", error);
-                                            }
-                                          }
-                                    }else if(value === "ContactPerson"){
-                                        const { value: ContactPerson } = await Swal.fire({
-                                            input: 'text',
-                                            inputLabel: 'Update Vender Contact2',
-                                            inputPlaceholder: 'Enter New Vender Contact2 Here',
-                                            inputAttributes: {
-                                              'aria-label': 'Enter New Vender Contact1 Here'
-                                            },
-                                            showCancelButton: true
-                                          })
-                                          if (ContactPerson) {
-                                            const postRef = doc(db, "Venders", rowId);
-                                            const postSnapshot = await getDoc(postRef);
-                                            const postData = postSnapshot.data();
-                                      
-                                            try {
-                                              await updateDoc(postRef, {
-                                                ContactPerson: ContactPerson,
-                                              });
-                                              window.location.reload()
-                                              // Optionally, update the UI to reflect the changes
-                                            } catch (error) {
-                                              console.error("Error updating document: ", error);
-                                            }
-                                          }
-                                    }else if(value === "Cnic"){
-                                        const { value: Cnic } = await Swal.fire({
-                                            input: 'text',
-                                            inputLabel: 'Update Vender CNIC',
-                                            inputPlaceholder: 'Enter New Vender CNIC Here',
-                                            inputAttributes: {
-                                              'aria-label': 'Enter New Vender CNIC Here'
-                                            },
-                                            showCancelButton: true
-                                          })
-                                          if (Cnic) {
-                                            const postRef = doc(db, "Venders", rowId);
-                                            const postSnapshot = await getDoc(postRef);
-                                            const postData = postSnapshot.data();
-                                      
-                                            try {
-                                              await updateDoc(postRef, {
-                                                Cnic: Cnic,
-                                              });
-                                              window.location.reload()
-                                              // Optionally, update the UI to reflect the changes
-                                            } catch (error) {
-                                              console.error("Error updating document: ", error);
-                                            }
-                                          }
-                                    }else if(value === "NtnNumber"){
-                                        const { value: NtnNumber } = await Swal.fire({
-                                            input: 'text',
-                                            inputLabel: 'Update Vender NTN Number',
-                                            inputPlaceholder: 'Enter New Vender NTN Number Here',
-                                            inputAttributes: {
-                                              'aria-label': 'Enter New Vender NTN Number Here'
-                                            },
-                                            showCancelButton: true
-                                          })
-                                          if (NtnNumber) {
-                                            const postRef = doc(db, "Venders", rowId);
-                                            const postSnapshot = await getDoc(postRef);
-                                            const postData = postSnapshot.data();
-                                      
-                                            try {
-                                              await updateDoc(postRef, {
-                                                NtnNumber: NtnNumber,
-                                              });
-                                              window.location.reload()
-                                              // Optionally, update the UI to reflect the changes
-                                            } catch (error) {
-                                              console.error("Error updating document: ", error);
-                                            }
-                                          }
-                                    }else if(value === "StnNumber"){
-                                        const { value: StnNumber } = await Swal.fire({
-                                            input: 'text',
-                                            inputLabel: 'Update Vender STN Number',
-                                            inputPlaceholder: 'Enter New Vender STN Number Here',
-                                            inputAttributes: {
-                                              'aria-label': 'Enter New Vender STN Number Here'
-                                            },
-                                            showCancelButton: true
-                                          })
-                                          if (StnNumber) {
-                                            const postRef = doc(db, "Venders", rowId);
-                                            const postSnapshot = await getDoc(postRef);
-                                            const postData = postSnapshot.data();
-                                      
-                                            try {
-                                              await updateDoc(postRef, {
-                                                StnNumber: StnNumber,
-                                              });
-                                              // Optionally, update the UI to reflect the changes
-                                            } catch (error) {
-                                              console.error("Error updating document: ", error);
-                                            }
-                                          }
-                                    }else if(value === "Adress"){
-                                        const { value: Adress } = await Swal.fire({
-                                            input: 'text',
-                                            inputLabel: 'Update Vender Address',
-                                            inputPlaceholder: 'Enter New Vender Address Here',
-                                            inputAttributes: {
-                                              'aria-label': 'Enter New Vender Address Here'
-                                            },
-                                            showCancelButton: true
-                                          })
-                                          if (Adress) {
-                                            const postRef = doc(db, "Venders", rowId);
-                                            const postSnapshot = await getDoc(postRef);
-                                            const postData = postSnapshot.data();
-                                      
-                                            try {
-                                              await updateDoc(postRef, {
-                                                Adress: Adress,
-                                              });
-                                              // Optionally, update the UI to reflect the changes
-                                            } catch (error) {
-                                              console.error("Error updating document: ", error);
-                                            }
-                                          }
-                                    }else if(value === "AdditionalInfo"){
-                                        const { value: AdditionalInfo } = await Swal.fire({
-                                            input: 'text',
-                                            inputLabel: 'Update Vender Additional Info',
-                                            inputPlaceholder: 'Enter New Vender Additional Info Here',
-                                            inputAttributes: {
-                                              'aria-label': 'Enter New Vender Additional Info Here'
-                                            },
-                                            showCancelButton: true
-                                          })
-                                          if (AdditionalInfo) {
-                                            const postRef = doc(db, "Venders", rowId);
-                                            const postSnapshot = await getDoc(postRef);
-                                            const postData = postSnapshot.data();
-                                      
-                                            try {
-                                              await updateDoc(postRef, {
-                                                AdditionalInfo: AdditionalInfo,
-                                              });
-                                              // Optionally, update the UI to reflect the changes
-                                            } catch (error) {
-                                              console.error("Error updating document: ", error);
-                                            }
-                                          }
-                                    } else {
-                                      resolve("Please Select Any One Field");
-                                    }
-                                  });
-                                }
-                              });
-                            
-                            }
-                    })
+                   window.location=`/EditVenders/id/:${rowId}`
                 }
             })
         } else {
@@ -487,7 +222,6 @@ export default function SeeVenders() {
 
 
     return (
-
         <main className="DashboardMain">
             <div className="DashboardleftSideBar">
                 <h2>Dashboard</h2>
@@ -564,7 +298,5 @@ export default function SeeVenders() {
 
             </div>
         </main>
-
-
     )
 }
