@@ -17,7 +17,7 @@ import { getFirestore } from "firebase/firestore";
 // };
 
 
-// Jaizm database credintials 
+// Jaizm database credintials hello
 
 const firebaseConfig = {
   apiKey: "AIzaSyAbAKpPuSYcUzeKauH4_hvh4R1ezRWKmVQ",
