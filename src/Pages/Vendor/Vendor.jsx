@@ -10,7 +10,11 @@ import Swal from 'sweetalert2';
 
 export default function Vendor() {
 
+    // authorized wala name hy yeh
     const [name, setName] = useState('')
+
+
+    // data wala name hy yeh
     const [Name, SetName] = useState('')
     const [Email, SetEmail] = useState('')
     const [Contact, SetContact] = useState('')
@@ -41,50 +45,50 @@ export default function Vendor() {
 
     async function AddVender() {
 
-if(Name && Email && Contact && ContactPerson && Cnic && NtnNumber && StnNumber && Adress && AdditionalInfo){
+        if (Name && Email && Contact && ContactPerson && Cnic && NtnNumber && StnNumber && Adress && AdditionalInfo) {
 
-        try {
-            const docRef = await addDoc(collection(db, "Venders"), {
-                "Code": VenderRandomCode,
-                "GLCode": VenderGlCodeFull,
-                "Name": Name,
-                "Email": Email,
-                "Contact": Contact,
-                "ContactPerson": ContactPerson,
-                "Cnic": Cnic,
-                "NtnNumber": NtnNumber,
-                "StnNumber": StnNumber,
-                "Adress": Adress,
-                "AdditionalInfo": AdditionalInfo,
-            });
+            try {
+                const docRef = await addDoc(collection(db, "Venders"), {
+                    "Code": VenderRandomCode,
+                    "GLCode": VenderGlCodeFull,
+                    "Name": Name,
+                    "Email": Email,
+                    "Contact": Contact,
+                    "ContactPerson": ContactPerson,
+                    "Cnic": Cnic,
+                    "NtnNumber": NtnNumber,
+                    "StnNumber": StnNumber,
+                    "Adress": Adress,
+                    "AdditionalInfo": AdditionalInfo,
+                });
 
-            console.log("Document written with ID: ", docRef.id);
-            Swal.fire({
-                title: 'Vender Added Successfully',
-                text: 'Vender Added',
-                icon: 'success',
-                showConfirmButton:false,
-                showCancelButton:false
-            })
-            document.getElementById("Name").value = '';
-            document.getElementById("email").value = '';
-            document.getElementById("contactNumber").value = '';
-            document.getElementById("contactPerson").value = '';
-            document.getElementById("CNICnumber").value = '';
-            document.getElementById("NTNnumber").value = '';
-            document.getElementById("STNnumber").value = '';
-            document.getElementById("address").value = '';
-            document.getElementById("additionalNote").value = '';
-            setTimeout(() => {
-                window.location = "/SeeVenders"
-            }, 2000);
+                console.log("Document written with ID: ", docRef.id);
+                Swal.fire({
+                    title: 'Vender Added Successfully',
+                    text: 'Vender Added',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    showCancelButton: false
+                })
+                document.getElementById("Name").value = '';
+                document.getElementById("email").value = '';
+                document.getElementById("contactNumber").value = '';
+                document.getElementById("contactPerson").value = '';
+                document.getElementById("CNICnumber").value = '';
+                document.getElementById("NTNnumber").value = '';
+                document.getElementById("STNnumber").value = '';
+                document.getElementById("address").value = '';
+                document.getElementById("additionalNote").value = '';
+                setTimeout(() => {
+                    window.location = "/SeeVenders"
+                }, 2000);
 
-        } catch (e) {
-            console.error("Error adding document: ", e);
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        } else {
+            alert("Please Fill All the Credentials")
         }
-    }else{
-        alert("Please Fill All the Credentials")
-    }
 
 
     }
