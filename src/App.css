@@ -211,7 +211,6 @@
 
   .Productbody {
     width: 100%;
-    overflow: scroll;
     height: inherit;
     display: 'flex';
     justify-content: 'center';
