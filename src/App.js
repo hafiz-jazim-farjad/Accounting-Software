@@ -22,6 +22,7 @@ export function LoginComponent() {
 export default function App() {
   return (
     <Routes>
+      {/* jazim */}
       <Route path="/" element={<LoginComponent />} />
       <Route path="/Login" element={<Login />} />
       {/* <Route path="/SignUp" element={<SignUp />} /> */}
