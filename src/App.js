@@ -15,6 +15,9 @@ import Employee from './Pages/Employee/Employee';
 import Salary from './Pages/Salary/Salary';
 import SeeVenders from './Pages/SeeVenders/SeeVenders';
 import SeeCustomers from './Pages/SeeCustomers/SeeCustomers';
+import EditVenders from './Pages/EditVender/EditVender';
+import EditCustomer from './Pages/EditCustomer/EditCustomer';
+
 export function LoginComponent() {
   return window.location = "/Login"
 }
@@ -29,9 +32,11 @@ export default function App() {
 
       <Route path="/Vendor" element={<Vendor />} />
       <Route path="/SeeVenders" element={<SeeVenders />} />
+      <Route path="/EditVenders/id/:id" element={<EditVenders />} />
 
       <Route path="/Customer" element={<Customer />} />
       <Route path="/SeeCustomers" element={<SeeCustomers />} />
+      <Route path="/EditCustomer/id/:id" element={<EditCustomer />} />
 
       <Route path="/Sale" element={<Sale />} />
       <Route path="/Purchase" element={<Purchase />} />
