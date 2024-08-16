@@ -72,7 +72,7 @@ export default function EditSales() {
     }, [SalesId]);
 
     // Function to handle form submission and update the vendor details
-    const EditSales = async () => {
+    const EditSales = async () => { 
         const docRef = doc(db, "Sales", SalesId);
         try {
             await updateDoc(docRef, {
