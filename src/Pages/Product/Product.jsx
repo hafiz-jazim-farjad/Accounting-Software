@@ -115,19 +115,19 @@ function Product() {
                         <div class="formGroup">
                             {/* code auto generate krna hy  */}
                             <input type="text" name="Code" id="Code" placeholder="Code Will Be Generate Auto" disabled />
-                            <input type="text" name="Name" id="Name" placeholder=" Name" />
+                            <input type="text" name="Name" id="Name" placeholder=" Name" onChange={(e)=>{SetName(e.target.value)}} />
                         </div>
 
                         <div class="formGroup">
                             {/* <label for="select"> Product Type</label> */}
                             <br />
-                            <select name="" id="select">
+                            <select name="" id="select" onChange={(e)=>{SetImportOrLocal(e.target.value)}}>
                                 <option value=""> Local </option>
                                 <option value=""> import </option>
                             </select>
                             <label for="Nature"> Product Nature</label>
                             <br />
-                            <select name="" id="Nature">
+                            <select name="" id="Nature" onChange={(e)=>{SetProductNature(e.target.value)}}>
                                 <option value=""> Consumeable </option>
                                 <option value=""> Assests </option>
                                 <option value=""> Etc... </option>
