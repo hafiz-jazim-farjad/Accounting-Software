@@ -138,20 +138,21 @@ export default function SeeCustomers() {
                 icon: 'success',
                 html: `
                 <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <h5><strong>Customer Name:</strong> ${Customer.Name}</h5>
-                            <h5><strong>Customer Email Code:</strong> ${Customer.Email}</h5>
-                            <h5><strong>Customer Contact:</strong> ${Customer.Contact}</h5>
-                            <h5><strong>Customer Cnic:</strong> ${Customer.Cnic}</h5>
-                            <h5><strong>Customer DeliveryDate:</strong> ${Customer.DeliveryDate}</h5>
-                            <h5><strong>Customer Payment:</strong> ${Customer.Payment}</h5>
-                            <h5><strong>Customer DesiredProduct:</strong> ${Customer.DesiredProduct}</h5>
-                            <h5><strong>AdditionalNote for Customer:</strong> ${Customer.AdditionalNote}</h5>
-                            <h5><strong>Customer purchased Quantity</strong> ${Customer.Quantity}</h5>
-                        </div>
-                    </div>
-                </div>
+    <div className="row" style="display: flex justify-content: center; align-items: center;; flex-wrap: wrap;">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <h5 style="margin-right: 20px;"><strong>Customer Name:</strong> ${Customer.Name}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Email Code:</strong> ${Customer.Email}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Contact:</strong> ${Customer.Contact}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Cnic:</strong> ${Customer.Cnic}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Delivery Date:</strong> ${Customer.DeliveryDate}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Payment:</strong> ${Customer.Payment}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Desired Product:</strong> ${Customer.DesiredProduct}</h5>
+            <h5 style="margin-right: 20px;"><strong>Additional Note for Customer:</strong> ${Customer.AdditionalNote}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Purchased Quantity:</strong> ${Customer.Quantity}</h5>
+        </div>
+    </div>
+</div>
+
                 `,
                 showCloseButton: true,
                 showConfirmButton: true,
@@ -172,11 +173,11 @@ export default function SeeCustomers() {
                         cancelButtonColor: '#d33',
                         confirmButtonText: 'Yes, delete it!'
                     }).then(async (result) => {
-                       window.location="/EditCustomers"
+                        window.location = "/EditCustomers"
                     })
-                }else if(result.dismiss === Swal.DismissReason.cancel) {
-                  window.location = `/EditCustomer/id/:${rowId}`
-                 
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    window.location = `/EditCustomer/id/:${rowId}`
+
                 }
             })
         } else {
@@ -240,7 +241,7 @@ export default function SeeCustomers() {
                     {/* <div className="Productbody" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow:'hidden ' }}> */}
                     {/* <p>Click the names to see more data.</p> */}
 
-                    <table style={{ width: '100%' , cursor:'alias' }}>
+                    <table style={{ width: '100%', cursor: 'alias' }}>
                         <thead>
                             <tr className="table-headers" style={{ fontSize: '12px', overflow: 'scroll' }}>
                                 <th>Name</th>
