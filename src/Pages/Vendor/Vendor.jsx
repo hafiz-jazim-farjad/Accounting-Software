@@ -161,13 +161,13 @@ export default function Vendor() {
                 <h2>Dashboard</h2>
                 <ul>
                     <Link to="/Dashboard"><li>Dashboard</li></Link>
-                    <Link to="/Vendor"><li>Add Vendor</li></Link>
+                    <Link to="/Vendor"><li>Vendor</li></Link>
                     <Link to="/Customer"><li>Customer</li></Link>
-                    <Link to="/Sale"><li>Sale</li></Link>
-                    <Link to="/Purchase"><li>Purchase</li></Link>
                     <Link to="/Product"><li>Product</li></Link>
-                    <Link to="/Invoice"><li>Invoice</li></Link>
                     <Link to="/UOM"><li>UOM</li></Link>
+                    <Link to="/Purchase"><li>Purchase</li></Link>
+                    <Link to="/Invoice"><li>Invoice</li></Link>
+                    <Link to="/Sale"><li>Sale</li></Link>
                     <Link to="/Attendance"><li>Attendance</li></Link>
                     <Link to="/Employee"><li>Employee</li></Link>
                     <Link to="/Salary"><li>Salary</li></Link>

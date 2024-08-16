@@ -17,6 +17,11 @@ function Product() {
     const VenderGlCodeFull = "PK" + VenderGlCode
     
 
+<<<<<<< HEAD
+=======
+    const [name, setName] = useState('')
+
+>>>>>>> b5a601aceb326ba033b17b40e80545b57ee5af06
     onAuthStateChanged(auth, (user) => {
         if (user) {
             setName(user.email)
@@ -79,13 +84,13 @@ function Product() {
                 <h2>Dashboard</h2>
                 <ul>
                     <Link to="/Dashboard"><li>Dashboard</li></Link>
-                    <Link to="/Vendor"><li>Add Vendor</li></Link>
+                    <Link to="/Vendor"><li>Vendor</li></Link>
                     <Link to="/Customer"><li>Customer</li></Link>
-                    <Link to="/Sale"><li>Sale</li></Link>
-                    <Link to="/Purchase"><li>Purchase</li></Link>
                     <Link to="/Product"><li>Product</li></Link>
-                    <Link to="/Invoice"><li>Invoice</li></Link>
                     <Link to="/UOM"><li>UOM</li></Link>
+                    <Link to="/Purchase"><li>Purchase</li></Link>
+                    <Link to="/Invoice"><li>Invoice</li></Link>
+                    <Link to="/Sale"><li>Sale</li></Link>
                     <Link to="/Attendance"><li>Attendance</li></Link>
                     <Link to="/Employee"><li>Employee</li></Link>
                     <Link to="/Salary"><li>Salary</li></Link>
@@ -114,20 +119,33 @@ function Product() {
                         <h2>Product Infomation</h2>
                         <div class="formGroup">
                             {/* code auto generate krna hy  */}
+<<<<<<< HEAD
                             <input type="text" name="Code" id="Code" placeholder="Code Will Be Generate Auto" disabled />
                             <input type="text" name="Name" id="Name" placeholder=" Name" onChange={(e)=>{SetName(e.target.value)}} />
+=======
+                            <input type="text" name="Code" id="Code" placeholder=" Code" autofocus />
+                            <input type="text" name="Name" id="Name" placeholder=" Name" />
+>>>>>>> b5a601aceb326ba033b17b40e80545b57ee5af06
                         </div>
 
                         <div class="formGroup">
                             {/* <label for="select"> Product Type</label> */}
                             <br />
+<<<<<<< HEAD
                             <select name="" id="select" onChange={(e)=>{SetImportOrLocal(e.target.value)}}>
+=======
+                            <select name="" id="select">
+>>>>>>> b5a601aceb326ba033b17b40e80545b57ee5af06
                                 <option value=""> Local </option>
                                 <option value=""> import </option>
                             </select>
                             <label for="Nature"> Product Nature</label>
                             <br />
+<<<<<<< HEAD
                             <select name="" id="Nature" onChange={(e)=>{SetProductNature(e.target.value)}}>
+=======
+                            <select name="" id="Nature">
+>>>>>>> b5a601aceb326ba033b17b40e80545b57ee5af06
                                 <option value=""> Consumeable </option>
                                 <option value=""> Assests </option>
                                 <option value=""> Etc... </option>
