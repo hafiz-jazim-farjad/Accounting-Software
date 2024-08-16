@@ -138,20 +138,21 @@ export default function SeeCustomers() {
         icon: 'success',
         html: `
                 <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <h5><strong>Customer Name:</strong> ${Customer.Name}</h5>
-                            <h5><strong>Customer Email Code:</strong> ${Customer.Email}</h5>
-                            <h5><strong>Customer Contact:</strong> ${Customer.Contact}</h5>
-                            <h5><strong>Customer Cnic:</strong> ${Customer.Cnic}</h5>
-                            <h5><strong>Customer DeliveryDate:</strong> ${Customer.DeliveryDate}</h5>
-                            <h5><strong>Customer Payment:</strong> ${Customer.Payment}</h5>
-                            <h5><strong>Customer DesiredProduct:</strong> ${Customer.DesiredProduct}</h5>
-                            <h5><strong>AdditionalNote for Customer:</strong> ${Customer.AdditionalNote}</h5>
-                            <h5><strong>Customer purchased Quantity</strong> ${Customer.Quantity}</h5>
-                        </div>
-                    </div>
-                </div>
+    <div className="row" style="display: flex justify-content: center; align-items: center;; flex-wrap: wrap;">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <h5 style="margin-right: 20px;"><strong>Customer Name:</strong> ${Customer.Name}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Email Code:</strong> ${Customer.Email}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Contact:</strong> ${Customer.Contact}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Cnic:</strong> ${Customer.Cnic}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Delivery Date:</strong> ${Customer.DeliveryDate}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Payment:</strong> ${Customer.Payment}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Desired Product:</strong> ${Customer.DesiredProduct}</h5>
+            <h5 style="margin-right: 20px;"><strong>Additional Note for Customer:</strong> ${Customer.AdditionalNote}</h5>
+            <h5 style="margin-right: 20px;"><strong>Customer Purchased Quantity:</strong> ${Customer.Quantity}</h5>
+        </div>
+    </div>
+</div>
+
                 `,
         showCloseButton: true,
         showConfirmButton: true,
@@ -161,313 +162,313 @@ export default function SeeCustomers() {
         confirmButtonColor: 'ref',
         cancelButtonColor: 'orange'
 
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to delete this Vender!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then(async (result) => {
-            if (result.isConfirmed) {
-              const postRef = doc(db, "Customers", rowId);
-              try {
-                await deleteDoc(postRef);
-              } catch (error) {
-                console.error("Error deleting document: ", error);
-              }
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Vender has been deleted Successfully',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            }
-          })
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          Swal.fire({
-            title: 'Are you Sure ?',
-            text: 'You Want to Edit This Customer Detail',
-            icon: 'success',
-            confirmButtonText: 'Close',
-            confirmButtonColor: '#3085d6',
-            showCloseButton: true,
-            showConfirmButton: true,
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-            confirmButtonColor: 'ref',
-            cancelButtonColor: 'orange'
-          }).then(async (EditResult) => {
-            if (EditResult.isConfirmed) {
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You want to delete this Vender!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then(async (result) => {
+                        if (result.isConfirmed) {
+                            const postRef = doc(db, "Customers", rowId);
+                            try {
+                                await deleteDoc(postRef);
+                            } catch (error) {
+                                console.error("Error deleting document: ", error);
+                            }
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Vender has been deleted Successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        } 
+                    })
+                }else if(result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        title: 'Are you Sure ?',
+                        text: 'You Want to Edit This Customer Detail',
+                        icon: 'success',
+                        confirmButtonText: 'Close',
+                        confirmButtonColor: '#3085d6',
+                        showCloseButton: true,
+                        showConfirmButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: 'No',
+                        confirmButtonColor: 'ref',
+                        cancelButtonColor: 'orange'
+                    }).then(async(EditResult)=>{
+                        if(EditResult.isConfirmed){
 
-              await Swal.fire({
-                title: "Select Your Updating Field",
-                input: "select",
-                inputOptions: {
-                  Venders: {
-                    Name: 'Name',
-                    Email: 'Email',
-                    Contact: 'Contact',
-                    Cnic: 'Cnic',
-                    DeliveryDate: "DeliveryDate",
-                    DesiredProduct: "DesiredProduct",
-                    PaymentMethod: "Payment",
-                    Quantity: "Quantity",
-                    AdditionalNote: 'AdditionalNote',
-                  },
-                },
-                inputPlaceholder: "Select a Field that you want to edit",
-                showCancelButton: true,
-                inputValidator: (value) => {
-                  return new Promise(async (resolve) => {
-                    if (value === "Name") {
-                      const { value: firstname } = await Swal.fire({
-                        input: 'text',
-                        inputLabel: 'Update Customer Name',
-                        inputPlaceholder: 'Enter New Customer Name Here',
-                        inputAttributes: {
-                          'aria-label': 'Enter New Customer Name Here'
-                        },
-                        showCancelButton: true
-                      })
-                      if (firstname) {
-                        const postRef = doc(db, "Customers", rowId);
-                        const postSnapshot = await getDoc(postRef);
-                        const postData = postSnapshot.data();
-
-                        try {
-                          await updateDoc(postRef, {
-                            Name: firstname,
-                          });
-                          window.location.reload()
-                          // Optionally, update the UI to reflect the changes
-                        } catch (error) {
-                          console.error("Error updating document: ", error);
-                        }
-                      }
-                    } else if (value === "Email") {
-                      const { value: email } = await Swal.fire({
-                        input: 'text',
-                        inputLabel: 'Update Customer Email',
-                        inputPlaceholder: 'Enter New Customer Email Here',
-                        inputAttributes: {
-                          'aria-label': 'Enter New Customer Email Here'
-                        },
-                        showCancelButton: true
-                      })
-                      if (email) {
-                        const postRef = doc(db, "Customers", rowId);
-                        const postSnapshot = await getDoc(postRef);
-                        const postData = postSnapshot.data();
-
-                        try {
-                          await updateDoc(postRef, {
-                            Email: email,
-                          });
-                          window.location.reload()
-                          // Optionally, update the UI to reflect the changes
-                        } catch (error) {
-                          console.error("Error updating document: ", error);
-                        }
-                      }
-                    } else if (value === "Contact") {
-                      const { value: Contact } = await Swal.fire({
-                        input: 'text',
-                        inputLabel: 'Update Customer Contact1',
-                        inputPlaceholder: 'Enter New Customer Contact1 Here',
-                        inputAttributes: {
-                          'aria-label': 'Enter New Customer Contact1 Here'
-                        },
-                        showCancelButton: true
-                      })
-                      if (Contact) {
-                        const postRef = doc(db, "Customers", rowId);
-                        const postSnapshot = await getDoc(postRef);
-                        const postData = postSnapshot.data();
-
-                        try {
-                          await updateDoc(postRef, {
-                            Contact: Contact,
-                          });
-                          window.location.reload()
-                          // Optionally, update the UI to reflect the changes
-                        } catch (error) {
-                          console.error("Error updating document: ", error);
-                        }
-                      }
-                    } else if (value === "Cnic") {
-                      const { value: Cnic } = await Swal.fire({
-                        input: 'text',
-                        inputLabel: 'Update Customer Cnic',
-                        inputPlaceholder: 'Enter New Customer Cnic Here',
-                        inputAttributes: {
-                          'aria-label': 'Enter New Customer Cnic Here'
-                        },
-                        showCancelButton: true
-                      })
-                      if (Cnic) {
-                        const postRef = doc(db, "Customers", rowId);
-                        const postSnapshot = await getDoc(postRef);
-                        const postData = postSnapshot.data();
-
-                        try {
-                          await updateDoc(postRef, {
-                            Cnic: Cnic,
-                          });
-                          window.location.reload()
-                          // Optionally, update the UI to reflect the changes
-                        } catch (error) {
-                          console.error("Error updating document: ", error);
-                        }
-                      }
-                    } else if (value === "DeliveryDate") {
-                      const { value: DeliveryDate } = await Swal.fire({
-                        input: 'date',
-                        inputLabel: 'Update Customer DeliveryDate',
-                        inputPlaceholder: 'Enter New Customer DeliveryDate Here',
-                        inputAttributes: {
-                          'aria-label': 'Enter New Customer DeliveryDate Here'
-                        },
-                        showCancelButton: true
-                      })
-                      if (DeliveryDate) {
-                        const postRef = doc(db, "Customers", rowId);
-                        const postSnapshot = await getDoc(postRef);
-                        const postData = postSnapshot.data();
-
-                        try {
-                          await updateDoc(postRef, {
-                            DeliveryDate: DeliveryDate,
-                          });
-                          window.location.reload()
-                          // Optionally, update the UI to reflect the changes
-                        } catch (error) {
-                          console.error("Error updating document: ", error);
-                        }
-                      }
-                    } else if (value === "DesiredProduct") {
-                      const { value: DesiredProduct } = await Swal.fire({
-                        input: 'text',
-                        inputLabel: 'Update Customer DesiredProduct',
-                        inputPlaceholder: 'Enter New Customer DesiredProduct Here',
-                        inputAttributes: {
-                          'aria-label': 'Enter New Customer DesiredProduct Here'
-                        },
-                        showCancelButton: true
-                      })
-                      if (DesiredProduct) {
-                        const postRef = doc(db, "Customers", rowId);
-                        const postSnapshot = await getDoc(postRef);
-                        const postData = postSnapshot.data();
-
-                        try {
-                          await updateDoc(postRef, {
-                            DesiredProduct: DesiredProduct,
-                          });
-                          window.location.reload()
-                          // Optionally, update the UI to reflect the changes
-                        } catch (error) {
-                          console.error("Error updating document: ", error);
-                        }
-                      }
-                    } else if (value === "PaymentMethod") {
-                      const { value: Payment } = await Swal.fire({
-                        input: 'text',
-                        inputLabel: 'Update Customer Payment Method',
-                        inputPlaceholder: 'Enter New Customer Payment Method Here',
-                        inputAttributes: {
-                          'aria-label': 'Enter New Customer Payment method Here'
-                        },
-                        showCancelButton: true
-                      })
-                      if (Payment) {
-                        const postRef = doc(db, "Customers", rowId);
-                        const postSnapshot = await getDoc(postRef);
-                        const postData = postSnapshot.data();
-
-                        try {
-                          await updateDoc(postRef, {
-                            Payment: Payment,
-                          });
-                          // Optionally, update the UI to reflect the changes
-                        } catch (error) {
-                          console.error("Error updating document: ", error);
-                        }
-                      }
-                    } else if (value === "Quantity") {
-                      const { value: Quantity } = await Swal.fire({
-                        input: 'text',
-                        inputLabel: 'Update Customer Product Quantity',
-                        inputPlaceholder: 'Enter New Customer Product Quantity Here',
-                        inputAttributes: {
-                          'aria-label': 'Enter New Customer Product Quantity Here'
-                        },
-                        showCancelButton: true
-                      })
-                      if (Quantity) {
-                        const postRef = doc(db, "Customers", rowId);
-                        const postSnapshot = await getDoc(postRef);
-                        const postData = postSnapshot.data();
-
-                        try {
-                          await updateDoc(postRef, {
-                            Quantity: Quantity,
-                          });
-                          // Optionally, update the UI to reflect the changes
-                        } catch (error) {
-                          console.error("Error updating document: ", error);
-                        }
-                      }
-                    } else if (value === "AdditionalNote") {
-                      const { value: AdditionalNote } = await Swal.fire({
-                        input: 'text',
-                        inputLabel: 'Update Customer AdditionalNote',
-                        inputPlaceholder: 'Enter New Customer AdditionalNote Here',
-                        inputAttributes: {
-                          'aria-label': 'Enter New Customer AdditionalNote Here'
-                        },
-                        showCancelButton: true
-                      })
-                      if (AdditionalNote) {
-                        const postRef = doc(db, "Customers", rowId);
-                        const postSnapshot = await getDoc(postRef);
-                        const postData = postSnapshot.data();
-
-                        try {
-                          await updateDoc(postRef, {
-                            AdditionalNote: AdditionalNote,
-                          });
-                          // Optionally, update the UI to reflect the changes
-                        } catch (error) {
-                          console.error("Error updating document: ", error);
-                        }
-                      }
-                    } else {
-                      resolve("Please Select Any One Field");
-                    }
-                  });
+                             await Swal.fire({
+                                title: "Select Your Updating Field",
+                                input: "select",
+                                inputOptions: {
+                                  Venders: {
+                                    Name:'Name',
+                                    Email:'Email',
+                                    Contact:'Contact',
+                                    Cnic:'Cnic',
+                                    DeliveryDate:"DeliveryDate",    
+                                    DesiredProduct:"DesiredProduct",
+                                    PaymentMethod:"Payment",
+                                    Quantity:"Quantity",
+                                    AdditionalNote:'AdditionalNote',
+                                  },
+                                },
+                                inputPlaceholder: "Select a Field that you want to edit",
+                                showCancelButton: true,
+                                inputValidator: (value) => {
+                                  return new Promise(async(resolve) => {
+                                    if (value === "Name") {
+                                        const { value: firstname } = await Swal.fire({
+                                            input: 'text',
+                                            inputLabel: 'Update Customer Name',
+                                            inputPlaceholder: 'Enter New Customer Name Here',
+                                            inputAttributes: {
+                                              'aria-label': 'Enter New Customer Name Here'
+                                            },
+                                            showCancelButton: true
+                                          })
+                                          if (firstname) {
+                                            const postRef = doc(db, "Customers", rowId);
+                                            const postSnapshot = await getDoc(postRef);
+                                            const postData = postSnapshot.data();
+                                      
+                                            try {
+                                              await updateDoc(postRef, {
+                                                Name: firstname,
+                                              });
+                                              window.location.reload()
+                                              // Optionally, update the UI to reflect the changes
+                                            } catch (error) {
+                                              console.error("Error updating document: ", error);
+                                            }
+                                          }
+                                    }else if(value === "Email"){
+                                        const { value: email } = await Swal.fire({
+                                            input: 'text',
+                                            inputLabel: 'Update Customer Email',
+                                            inputPlaceholder: 'Enter New Customer Email Here',
+                                            inputAttributes: {
+                                              'aria-label': 'Enter New Customer Email Here'
+                                            },
+                                            showCancelButton: true
+                                          })
+                                          if (email) {
+                                            const postRef = doc(db, "Customers", rowId);
+                                            const postSnapshot = await getDoc(postRef);
+                                            const postData = postSnapshot.data();
+                                      
+                                            try {
+                                              await updateDoc(postRef, {
+                                                Email: email,
+                                              });
+                                              window.location.reload()
+                                              // Optionally, update the UI to reflect the changes
+                                            } catch (error) {
+                                              console.error("Error updating document: ", error);
+                                            }
+                                          }
+                                    }else if(value === "Contact"){
+                                        const { value: Contact } = await Swal.fire({
+                                            input: 'text',
+                                            inputLabel: 'Update Customer Contact1',
+                                            inputPlaceholder: 'Enter New Customer Contact1 Here',
+                                            inputAttributes: {
+                                              'aria-label': 'Enter New Customer Contact1 Here'
+                                            },
+                                            showCancelButton: true
+                                          })
+                                          if (Contact) {
+                                            const postRef = doc(db, "Customers", rowId);
+                                            const postSnapshot = await getDoc(postRef);
+                                            const postData = postSnapshot.data();
+                                      
+                                            try {
+                                              await updateDoc(postRef, {
+                                                Contact: Contact,
+                                              });
+                                              window.location.reload()
+                                              // Optionally, update the UI to reflect the changes
+                                            } catch (error) {
+                                              console.error("Error updating document: ", error);
+                                            }
+                                          }
+                                    }else if(value === "Cnic"){
+                                        const { value: Cnic } = await Swal.fire({
+                                            input: 'text',
+                                            inputLabel: 'Update Customer Cnic',
+                                            inputPlaceholder: 'Enter New Customer Cnic Here',
+                                            inputAttributes: {
+                                              'aria-label': 'Enter New Customer Cnic Here'
+                                            },
+                                            showCancelButton: true
+                                          })
+                                          if (Cnic) {
+                                            const postRef = doc(db, "Customers", rowId);
+                                            const postSnapshot = await getDoc(postRef);
+                                            const postData = postSnapshot.data();
+                                      
+                                            try {
+                                              await updateDoc(postRef, {
+                                                Cnic: Cnic,
+                                              });
+                                              window.location.reload()
+                                              // Optionally, update the UI to reflect the changes
+                                            } catch (error) {
+                                              console.error("Error updating document: ", error);
+                                            }
+                                          }
+                                    }else if(value === "DeliveryDate"){
+                                        const { value: DeliveryDate } = await Swal.fire({
+                                            input: 'date',
+                                            inputLabel: 'Update Customer DeliveryDate',
+                                            inputPlaceholder: 'Enter New Customer DeliveryDate Here',
+                                            inputAttributes: {
+                                              'aria-label': 'Enter New Customer DeliveryDate Here'
+                                            },
+                                            showCancelButton: true
+                                          })
+                                          if (DeliveryDate) {
+                                            const postRef = doc(db, "Customers", rowId);
+                                            const postSnapshot = await getDoc(postRef);
+                                            const postData = postSnapshot.data();
+                                      
+                                            try {
+                                              await updateDoc(postRef, {
+                                                DeliveryDate: DeliveryDate,
+                                              });
+                                              window.location.reload()
+                                              // Optionally, update the UI to reflect the changes
+                                            } catch (error) {
+                                              console.error("Error updating document: ", error);
+                                            }
+                                          }
+                                    }else if(value === "DesiredProduct"){
+                                        const { value: DesiredProduct } = await Swal.fire({
+                                            input: 'text',
+                                            inputLabel: 'Update Customer DesiredProduct',
+                                            inputPlaceholder: 'Enter New Customer DesiredProduct Here',
+                                            inputAttributes: {
+                                              'aria-label': 'Enter New Customer DesiredProduct Here'
+                                            },
+                                            showCancelButton: true
+                                          })
+                                          if (DesiredProduct) {
+                                            const postRef = doc(db, "Customers", rowId);
+                                            const postSnapshot = await getDoc(postRef);
+                                            const postData = postSnapshot.data();
+                                      
+                                            try {
+                                              await updateDoc(postRef, {
+                                                DesiredProduct: DesiredProduct,
+                                              });
+                                              window.location.reload()
+                                              // Optionally, update the UI to reflect the changes
+                                            } catch (error) {
+                                              console.error("Error updating document: ", error);
+                                            }
+                                          }
+                                    }else if(value === "PaymentMethod"){
+                                        const { value: Payment } = await Swal.fire({
+                                            input: 'text',
+                                            inputLabel: 'Update Customer Payment Method',
+                                            inputPlaceholder: 'Enter New Customer Payment Method Here',
+                                            inputAttributes: {
+                                              'aria-label': 'Enter New Customer Payment method Here'
+                                            },
+                                            showCancelButton: true
+                                          })
+                                          if (Payment) {
+                                            const postRef = doc(db, "Customers", rowId);
+                                            const postSnapshot = await getDoc(postRef);
+                                            const postData = postSnapshot.data();
+                                      
+                                            try {
+                                              await updateDoc(postRef, {
+                                                Payment: Payment,
+                                              });
+                                              // Optionally, update the UI to reflect the changes
+                                            } catch (error) {
+                                              console.error("Error updating document: ", error);
+                                            }
+                                          }
+                                    }else if(value === "Quantity"){
+                                        const { value: Quantity } = await Swal.fire({
+                                            input: 'text',
+                                            inputLabel: 'Update Customer Product Quantity',
+                                            inputPlaceholder: 'Enter New Customer Product Quantity Here',
+                                            inputAttributes: {
+                                              'aria-label': 'Enter New Customer Product Quantity Here'
+                                            },
+                                            showCancelButton: true
+                                          })
+                                          if (Quantity) {
+                                            const postRef = doc(db, "Customers", rowId);
+                                            const postSnapshot = await getDoc(postRef);
+                                            const postData = postSnapshot.data();
+                                      
+                                            try {
+                                              await updateDoc(postRef, {
+                                                Quantity: Quantity,
+                                              });
+                                              // Optionally, update the UI to reflect the changes
+                                            } catch (error) {
+                                              console.error("Error updating document: ", error);
+                                            }
+                                          }
+                                    }else if(value === "AdditionalNote"){
+                                        const { value: AdditionalNote } = await Swal.fire({
+                                            input: 'text',
+                                            inputLabel: 'Update Customer AdditionalNote',
+                                            inputPlaceholder: 'Enter New Customer AdditionalNote Here',
+                                            inputAttributes: {
+                                              'aria-label': 'Enter New Customer AdditionalNote Here'
+                                            },
+                                            showCancelButton: true
+                                          })
+                                          if (AdditionalNote) {
+                                            const postRef = doc(db, "Customers", rowId);
+                                            const postSnapshot = await getDoc(postRef);
+                                            const postData = postSnapshot.data();
+                                      
+                                            try {
+                                              await updateDoc(postRef, {
+                                                AdditionalNote: AdditionalNote,
+                                              });
+                                              // Optionally, update the UI to reflect the changes
+                                            } catch (error) {
+                                              console.error("Error updating document: ", error);
+                                            }
+                                          }
+                                    } else {
+                                      resolve("Please Select Any One Field");
+                                    }
+                                  });
+                                }
+                              });
+                            
+                            }
+                    })
                 }
-              });
-
-            }
-          })
+            })
+        } else {
+            Swal.fire({
+                title: 'Error',
+                text: 'No such document!',
+                icon: 'error',
+                confirmButtonText: 'Close',
+                confirmButtonColor: '#3085d6'
+            });
         }
-      })
-    } else {
-      Swal.fire({
-        title: 'Error',
-        text: 'No such document!',
-        icon: 'error',
-        confirmButtonText: 'Close',
-        confirmButtonColor: '#3085d6'
-      });
     }
-  }
 
 
 
@@ -519,18 +520,18 @@ export default function SeeCustomers() {
           {/* <div className="Productbody" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow:'hidden ' }}> */}
           {/* <p>Click the names to see more data.</p> */}
 
-          <table style={{ width: '100%', cursor: 'alias' }}>
-            <thead>
-              <tr className="table-headers" style={{ fontSize: '12px', overflow: 'scroll' }}>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Contact</th>
-                <th>CNIC</th>
-                <th>Payment</th>
-              </tr>
-            </thead>
-            {/* <tbody style={{ overflow: 'scroll', height: '100px !important' }} id='TableBody' > */}
-            <tbody id='TableBody' >
+                    <table style={{ width: '100%' , cursor:'alias' }}>
+                        <thead>
+                            <tr className="table-headers" style={{ fontSize: '12px', overflow: 'scroll' }}>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>CNIC</th>
+                                <th>Payment</th>
+                            </tr>
+                        </thead>
+                        {/* <tbody style={{ overflow: 'scroll', height: '100px !important' }} id='TableBody' > */}
+                        <tbody id='TableBody' >
 
               {/* <tr>
       <td>Flex</td>

@@ -78,24 +78,7 @@ export default function Dashboard() {
         });
     }
 
-    function ShowVenders() {
-        Swal.fire({
-            text: "Watch Or Add the Vendors",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            cancelButtonText: "See",
-            confirmButtonText: "Add"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // User clicked "Add"
-                window.location.href = "/Vendor";
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                // User clicked "See"
-                window.location.href = "/SeeVenders";
-            }
-        });
-    }
+
 
     return (
         <main className="DashboardMain">
@@ -105,7 +88,7 @@ export default function Dashboard() {
                 </div>
                 <ul id='ul'>
                     <Link to="/Dashboard"><li> Dashboard</li></Link>
-                    <Link onClick={ShowVenders}><li>Vendor</li></Link>
+                    <Link to="/Vendor"><li>Vendor</li></Link>
                     {/* <Link to="/Vendor" id='Venders' style={{display:'none'}}><li>See Vendors</li></Link> */}
                     <Link to="/Customer"><li>Customer</li></Link>
                     <Link to="/Product"><li>Product</li></Link>

@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../App.css'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect , createContext } from 'react'
 import { auth } from '../../Firebase/Firebase'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, query, collection, getDocs, deleteDoc, updateDoc } from 'firebase/firestore';
@@ -13,9 +13,16 @@ export default function SeeVenders() {
   const [name, setName] = useState('')
   const [Vender, SetVenders] = useState([])
 
+<<<<<<< HEAD
   const VenderRandomCode = Math.floor(Math.random() * 100000)
   const VenderGlCode = Math.floor(Math.random() * 100000)
   const VenderGlCodeFull = "PK" + VenderGlCode
+=======
+
+    const VenderRandomCode = Math.floor(Math.random() * 100000)
+    const VenderGlCode = Math.floor(Math.random() * 100000)
+    const VenderGlCodeFull = "PK" + VenderGlCode
+>>>>>>> 191a482225850831a031903e45b0f92e3f5edf9a
 
 
   useEffect(() => {
@@ -248,6 +255,7 @@ export default function SeeVenders() {
                         const postSnapshot = await getDoc(postRef);
                         const postData = postSnapshot.data();
 
+<<<<<<< HEAD
                         try {
                           await updateDoc(postRef, {
                             Name: firstname,
@@ -459,6 +467,37 @@ export default function SeeVenders() {
                       resolve("Please Select Any One Field");
                     }
                   });
+=======
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You want to delete this Vender!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then(async (result) => {
+                        if (result.isConfirmed) {
+                            const postRef = doc(db, "Venders", rowId);
+                            try {
+                                await deleteDoc(postRef);
+                            } catch (error) {
+                                console.error("Error deleting document: ", error);
+                            }
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Vender has been deleted Successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        } 
+                    })
+                }else if(result.dismiss === Swal.DismissReason.cancel) {
+                   window.location=`/EditVenders/id/:${rowId}`
+>>>>>>> 191a482225850831a031903e45b0f92e3f5edf9a
                 }
               });
 
@@ -486,6 +525,7 @@ export default function SeeVenders() {
 
 
 
+<<<<<<< HEAD
   return (
 
     <main className="DashboardMain">
@@ -509,6 +549,30 @@ export default function SeeVenders() {
             <Link to="/login"><li>Login</li></Link>
             <Link to="/signup"><li>Signup</li></Link>
             <Link onClick={logout} ><li style={{ backgroundColor: 'red', color: 'white' }} >Logout</li></Link>
+=======
+    return (
+        <main className="DashboardMain">
+            <div className="DashboardleftSideBar">
+                <h2>Dashboard</h2>
+                <ul>
+                    <Link to="/Dashboard"><li>Dashboard</li></Link>
+                    <Link to="/Vendor"><li>Vendor</li></Link>
+                    <Link to="/Customer"><li>Customer</li></Link>
+                    <Link to="/Sale"><li>Sale</li></Link>
+                    <Link to="/Purchase"><li>Purchase</li></Link>
+                    <Link to="/Product"><li>Product</li></Link>
+                    <Link to="/Invoice"><li>Invoice</li></Link>
+                    <Link to="/UOM"><li>UOM</li></Link>
+                    <Link to="/Attendance"><li>Attendance</li></Link>
+                    <Link to="/Employee"><li>Employee</li></Link>
+                    <Link to="/Salary"><li>Salary</li></Link>
+                </ul>
+                <div className="login_signup">
+                    <ul>
+                        <Link to="/login"><li>Login</li></Link>
+                        <Link to="/signup"><li>Signup</li></Link>
+                        <Link onClick={logout} ><li style={{ backgroundColor: 'red', color: 'white' }} >Logout</li></Link>
+>>>>>>> 191a482225850831a031903e45b0f92e3f5edf9a
 
           </ul>
         </div>
@@ -562,9 +626,15 @@ export default function SeeVenders() {
 
         </div>
 
+<<<<<<< HEAD
       </div>
     </main>
 
 
   )
+=======
+            </div>
+        </main>
+    )
+>>>>>>> 191a482225850831a031903e45b0f92e3f5edf9a
 }

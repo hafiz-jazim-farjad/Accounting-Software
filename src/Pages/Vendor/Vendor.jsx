@@ -87,8 +87,13 @@ export default function Vendor() {
                 console.error("Error adding document: ", e);
             }
         } else {
-            alert("Please Fill All the Credentials")
-        }
+            Swal.fire({
+                title: 'Please Fill All The Credentials',
+                text: 'Without Filling All The Creedentials You Will Not Be Able To Add Vender',
+                icon: 'error',
+                showConfirmButton: false,
+                showCancelButton: false
+            })        }
 
 
     }
@@ -218,7 +223,10 @@ export default function Vendor() {
                         <div class="formGroup">
                             <input type="text" name="additionalNote" id="additionalNote" placeholder="Additional Info" onChange={(e) => SetAdditionalInfo(e.target.value)} />
                         </div>
-                        <button type='submit' id="submit" onClick={AddVender}> Add Vender </button>
+                        <div style={{display:'flex:',justifyContent:'center' , alignItems:'center' , width:'100% important'}}>
+                        <button type='submit' id="submit" onClick={AddVender}style={{backgroundColor:'orange' , width:'150px' , color:'white'}}> Add Vender </button>
+                      <p>f</p> <Link to="/SeeVenders" ><button type='submit' style={{backgroundColor:'orange' , width:'150px' , color:'white'}}> See Vender</button></Link>
+                        </div>
                     </main>
 
 
