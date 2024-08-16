@@ -17,6 +17,8 @@ import SeeVenders from './Pages/SeeVenders/SeeVenders';
 import SeeCustomers from './Pages/SeeCustomers/SeeCustomers';
 import EditVenders from './Pages/EditVender/EditVender';
 import EditCustomer from './Pages/EditCustomer/EditCustomer';
+import SeeSales from './Pages/SeeSales/SeeSales';
+import EditSales from './Pages/EditSales/EditSales';
 
 export function LoginComponent() {
   return window.location = "/Login"
@@ -39,6 +41,9 @@ export default function App() {
       <Route path="/EditCustomer/id/:id" element={<EditCustomer />} />
 
       <Route path="/Sale" element={<Sale />} />
+      <Route path="/SeeSales" element={<SeeSales />} />
+      <Route path="/EditSales/id/:id" element={<EditSales />} />
+
       <Route path="/Purchase" element={<Purchase />} />
       <Route path="/Product" element={<Product />} />
       <Route path="/Invoice" element={<Invoice />} />

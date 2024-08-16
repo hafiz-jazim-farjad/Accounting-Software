@@ -8,10 +8,9 @@ import { doc, getDoc, query, collection, getDocs, deleteDoc, updateDoc } from 'f
 import { db } from '../../Firebase/Firebase'
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
-export default function SeeCustomers() {
+export default function SeeSales() {
 
     const [name, setName] = useState('')
-    const [Customers, SetCustomers] = useState([])
 
     useEffect(() => {
 
@@ -86,8 +85,8 @@ export default function SeeCustomers() {
     }
 
 
-    async function getCustomers() {
-        const q = query(collection(db, "Customers"));
+    async function getSales() {
+        const q = query(collection(db, "Sales"));
         const querySnapshot = await getDocs(q);
 
         let rows = "";
@@ -105,8 +104,8 @@ export default function SeeCustomers() {
                 <td>${Customers.Name}</td>
                 <td className="mobile-header">${Customers.Email}</td>
                 <td className="mobile-header">${Customers.Contact}</td>
-                <td className="mobile-header">${Customers.Cnic}</td>
-                <td className="mobile-header">${Customers.Payment}</td>
+                <td className="mobile-header">${Customers.DeliveryDate}</td>
+                <td className="mobile-header">${Customers.Quantity}</td>
             </tr>
             `;
 
@@ -127,28 +126,28 @@ export default function SeeCustomers() {
 
     async function OpenDetail(rowId) {
         // Fetch the specific vendor document based on the rowId
-        const docRef = doc(db, "Customers", rowId);
+        const docRef = doc(db, "Sales", rowId);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            const Customer = docSnap.data();
+            const Sales = docSnap.data();
 
             Swal.fire({
-                title: '<strong>Customer Details</strong>',
+                title: '<strong>Sales Details</strong>',
                 icon: 'success',
                 html: `
                 <div className="container">
     <div className="row" style="display: flex justify-content: center; align-items: center;; flex-wrap: wrap;">
         <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-            <h5 style="margin-right: 20px;"><strong>Customer Name:</strong> ${Customer.Name}</h5>
-            <h5 style="margin-right: 20px;"><strong>Customer Email Code:</strong> ${Customer.Email}</h5>
-            <h5 style="margin-right: 20px;"><strong>Customer Contact:</strong> ${Customer.Contact}</h5>
-            <h5 style="margin-right: 20px;"><strong>Customer Cnic:</strong> ${Customer.Cnic}</h5>
-            <h5 style="margin-right: 20px;"><strong>Customer Delivery Date:</strong> ${Customer.DeliveryDate}</h5>
-            <h5 style="margin-right: 20px;"><strong>Customer Payment:</strong> ${Customer.Payment}</h5>
-            <h5 style="margin-right: 20px;"><strong>Customer Desired Product:</strong> ${Customer.DesiredProduct}</h5>
-            <h5 style="margin-right: 20px;"><strong>Additional Note for Customer:</strong> ${Customer.AdditionalNote}</h5>
-            <h5 style="margin-right: 20px;"><strong>Customer Purchased Quantity:</strong> ${Customer.Quantity}</h5>
+            <h5 style="margin-right: 20px;"><strong>Buyer Name:</strong> ${Sales.Name}</h5>
+            <h5 style="margin-right: 20px;"><strong>Buyer Email Code:</strong> ${Sales.Email}</h5>
+            <h5 style="margin-right: 20px;"><strong>Buyer Contact:</strong> ${Sales.Contact}</h5>
+            <h5 style="margin-right: 20px;"><strong>Buyer ProductName:</strong> ${Sales.ProductName}</h5>
+            <h5 style="margin-right: 20px;"><strong>Buyer Quantity:</strong> ${Sales.Quantity}</h5>
+            <h5 style="margin-right: 20px;"><strong>Buyer SaledPrice:</strong> ${Sales.SaledPrice}</h5>
+            <h5 style="margin-right: 20px;"><strong>Buyer DeliveryDate:</strong> ${Sales.DeliveryDate}</h5>
+            <h5 style="margin-right: 20px;"><strong>Buyer Payment Method:</strong> ${Sales.Payment}</h5>
+            <h5 style="margin-right: 20px;"><strong>Buyer AdditionalNote:</strong> ${Sales.AdditionalNote}</h5>
         </div>
     </div>
 </div>
@@ -166,7 +165,7 @@ export default function SeeCustomers() {
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: 'Are you sure?',
-                        text: "You want to delete this Vender!",
+                        text: "You want to delete this Sale!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
@@ -174,7 +173,7 @@ export default function SeeCustomers() {
                         confirmButtonText: 'Yes, delete it!'
                     }).then(async (result) => {
                         if (result.isConfirmed) {
-                            const postRef = doc(db, "Customers", rowId);
+                            const postRef = doc(db, "Sales", rowId);
                             try {
                                 await deleteDoc(postRef);
                             } catch (error) {
@@ -190,7 +189,7 @@ export default function SeeCustomers() {
                         } 
                     })
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    window.location = `/EditCustomer/id/:${rowId}`
+                    window.location = `/EditSales/id/:${rowId}`
 
                 }
             })
@@ -207,7 +206,7 @@ export default function SeeCustomers() {
 
 
 
-    getCustomers();
+    getSales();
 
 
 
@@ -261,8 +260,8 @@ export default function SeeCustomers() {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Contact</th>
-                                <th>CNIC</th>
-                                <th>Payment</th>
+                                <th>DeliveryDate</th>
+                                <th>Quantity</th>
                             </tr>
                         </thead>
                         {/* <tbody style={{ overflow: 'scroll', height: '100px !important' }} id='TableBody' > */}
