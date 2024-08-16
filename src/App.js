@@ -19,7 +19,8 @@ import EditVenders from './Pages/EditVender/EditVender';
 import EditCustomer from './Pages/EditCustomer/EditCustomer';
 import SeeSales from './Pages/SeeSales/SeeSales';
 import EditSales from './Pages/EditSales/EditSales';
-
+import SeeProducts from './Pages/SeeProducts/SeeProducts';
+import EditProduct from './Pages/EditProduct/EditProduct';
 export function LoginComponent() {
   return window.location = "/Login"
 }
@@ -45,8 +46,13 @@ export default function App() {
       <Route path="/EditSales/id/:id" element={<EditSales />} />
 
       <Route path="/Purchase" element={<Purchase />} />
+
       <Route path="/Product" element={<Product />} />
+      <Route path="/SeeProducts" element={<SeeProducts />} />
+      <Route path="//EditProduct/id/:id" element={<EditProduct />} />
+
       <Route path="/Invoice" element={<Invoice />} />
+
       <Route path="/UOM" element={<UOM />} />
       <Route path="/Attendance" element={<Attendance />} />
       <Route path="/Employee" element={<Employee />} />
