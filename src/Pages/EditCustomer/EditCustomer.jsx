@@ -86,14 +86,17 @@ export default function EditCustomer() {
                 Payment,
                 AdditionalNote
             });
+            
             Swal.fire({
-                title: 'Customer Updated Successfully',
-                text: 'Customer information has been updated.',
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            window.location="/SeeCustomers"
+                    title: 'Customer Updated Successfully',
+                    text: 'Customer information has been updated.',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setTimeout(()=>{
+                    window.location="/SeeCustomers"
+                } , 2000)
         } catch (error) {
             Swal.fire({
                 title: 'Error',
