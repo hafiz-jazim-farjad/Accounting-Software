@@ -44,8 +44,8 @@ export default function SignUp() {
             <div style={{display:'flex' , justifyContent:'center' , alignItems:'center' , flexDirection:'column' , rowGap:'10px'}}>
 
             <h2>SignUp</h2>
-            <input type="text" name="user" id="user" placeholder="username / email" autofocus class="LoginInputs" onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" name="Password" id="Password" placeholder="Password" class="LoginInputs" onChange={(e) => setPassword(e.target.value)} />
+            <input type="text" name="user" id="user" placeholder="username / email" autofocus class="LoginInputs input" onChange={(e) => setEmail(e.target.value)} />
+            <input type="password" name="Password" id="Password" placeholder="Password" class="LoginInputs input" onChange={(e) => setPassword(e.target.value)} />
             <button type="submit" onClick={CreateUser} id="submit" > Login </button>
             <button  onClick={ToLogin} style={{backgroundColor:'transparent' , border:'none'}} > Login </button>
             </div>

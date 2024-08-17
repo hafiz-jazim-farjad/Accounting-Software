@@ -1,5 +1,5 @@
-input,
-textarea {
+.forInvoice input,
+.forInvoice textarea {
     background-color: #FFB938 !important;
     /* color: white !important; */
 }
