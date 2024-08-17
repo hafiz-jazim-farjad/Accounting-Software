@@ -184,23 +184,23 @@ export default function EditSales() {
                     <main className="main">
                         <h2>Edit Sales Info</h2>
                         <div className="formGroup">
-                            <input type="text" name="customerName" id="Name" placeholder="Customer Name" value={Name} onChange={(e) => SetName(e.target.value)} />
-                            <input type="tel" name="contactNumber" id="contactNumber" placeholder="Contact Number" value={Contact} onChange={(e) => SetContact(e.target.value)} />
+                            <input className='input' type="text" name="customerName" id="Name" placeholder="Customer Name" value={Name} onChange={(e) => SetName(e.target.value)} />
+                            <input className='input' type="tel" name="contactNumber" id="contactNumber" placeholder="Contact Number" value={Contact} onChange={(e) => SetContact(e.target.value)} />
                         </div>
                         <div className="formGroup">
-                            <input type="email" name="email" id="email" placeholder="Customer Email Address" value={Email} onChange={(e) => SetEmail(e.target.value)} />
-                            <input type="text" name="ProductName" id="ProductName" placeholder="ProductName" value={ProductName} onChange={(e) => SetProductName(e.target.value)} />
+                            <input className='input' type="email" name="email" id="email" placeholder="Customer Email Address" value={Email} onChange={(e) => SetEmail(e.target.value)} />
+                            <input className='input' type="text" name="ProductName" id="ProductName" placeholder="ProductName" value={ProductName} onChange={(e) => SetProductName(e.target.value)} />
                         </div>
                         <div className="formGroup">
-                            <input type="text" name="quantity" id="Quantity" placeholder="Quantity" value={Quantity} onChange={(e) => SetQuantity(e.target.value)} />
-                            <input type="text" name="SaledPrice" id="SaledPrice" placeholder="Saled Price" value={SaledPrice} onChange={(e) => SetSaledPrice(e.target.value)} />
+                            <input className='input' type="text" name="quantity" id="Quantity" placeholder="Quantity" value={Quantity} onChange={(e) => SetQuantity(e.target.value)} />
+                            <input className='input' type="text" name="SaledPrice" id="SaledPrice" placeholder="Saled Price" value={SaledPrice} onChange={(e) => SetSaledPrice(e.target.value)} />
                         </div>
                         <div className="formGroup">
-                            <input type="date" name="saleDate" id="Delivery" placeholder="Sale Date" value={DeliveryDate} onChange={(e) => SetDeliveryDate(e.target.value)} />
-                            <input type="text" name="paymentMethod" id="address" placeholder="Cash / Cheque / Account Transfer" value={Payment} onChange={(e) => SetPayment(e.target.value)} />
+                            <input className='input' type="date" name="saleDate" id="Delivery" placeholder="Sale Date" value={DeliveryDate} onChange={(e) => SetDeliveryDate(e.target.value)} />
+                            <input className='input' type="text" name="paymentMethod" id="address" placeholder="Cash / Cheque / Account Transfer" value={Payment} onChange={(e) => SetPayment(e.target.value)} />
                         </div>
                         <div className="formGroup">
-                            <input type="text" name="additionalNote" id="additionalNote" placeholder="Additional Note About the Customer" value={AdditionalNote} onChange={(e) => SetAdditionalNote(e.target.value)} />
+                            <input className='input' type="text" name="additionalNote" id="additionalNote" placeholder="Additional Note About the Customer" value={AdditionalNote} onChange={(e) => SetAdditionalNote(e.target.value)} />
                         </div>
                         <button type="submit" id="submit" onClick={EditSales}>Updated Sale</button>
                     </main>

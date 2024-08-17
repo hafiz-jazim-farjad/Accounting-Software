@@ -5,9 +5,9 @@
     /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
   }
 
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 
 
   body {
@@ -55,8 +55,8 @@
     gap: 10px;
   }
 
-  input,
-  textarea {
+  .input,
+  main textarea {
     width: 100%;
     height: 50px;
     text-align: center;
@@ -93,38 +93,38 @@
     display: none;
   }
 
-  table {
+  main table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
     overflow: scroll;
   }
 
-  td,
-  th {
+  main table tr td,
+  main table th {
     border-top: 1px solid #ECF0F1;
     padding: 10px;
   }
 
-  td {
+  main table tr td {
     border-left: 1px solid #ECF0F1;
     border-right: 1px solid #ECF0F1;
   }
 
-  th {
+  main table th {
     background-color: #4ECDC4;
   }
 
-  tr:nth-of-type(even) td {
+  main table tr:nth-of-type(even) td {
     background-color: #B9E5E1;
     /* Manually lightened color */
   }
 
-  .total th {
+  main .total th {
     background-color: white;
   }
 
-  .total td {
+  main .total td {
     text-align: right;
     font-weight: 700;
   }

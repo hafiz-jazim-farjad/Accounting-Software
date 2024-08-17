@@ -44,6 +44,7 @@ function Purchase() {
                     const Vender = doc.data();
                     const code = Vender.Code;
                     const name = Vender.Name; // Get Vender.Name
+                    const Product = Vender.AdditionalInfo; // Get Vender.Name
 
                     // Store both code and name in the venderData object
                     venderData[code] = {
@@ -52,7 +53,7 @@ function Purchase() {
                     };
 
                     // Add option element directly
-                    selectElement.innerHTML += `<option value="${code}">${code}</option>`;
+                    selectElement.innerHTML += `<option value="${code}">${Product} ${code}</option>`;
                 });
 
                 // Event listener for dropdown change
@@ -206,15 +207,15 @@ function Purchase() {
                     <main className="main">
                         <h2>Purchase</h2>
                         <div className="formGroup">
-                            <input type="text" name="Code" id="Code" placeholder="Purchase Code Will Generate Auto" disabled />
-                            <input type="date" name="date" id="date" placeholder="date" onChange={(e) => { SetPurchaseDate(e.target.value) }} />
+                            <input className='input' type="text" name="Code" id="Code" placeholder="Purchase Code Will Generate Auto" disabled />
+                            <input className='input' type="date" name="date" id="date" placeholder="date" onChange={(e) => { SetPurchaseDate(e.target.value) }} />
                             <select name="Vendo Code" id="VendoCode" className="advancePayment" style={{ height: '50px', borderRadius: '10px', border: '1px solid black' }} onChange={(e) => { SetAdvancePaymentOrNot(e.target.value) }} ref={venderCodeRef}>
                                 {/* Options will be dynamically added here */}
                             </select>
-                            <input type="text" name="Vendo name" id="Vendo name" placeholder="Vendo name" value={VenderName} />
+                            <input className='input' type="text" name="Vendo name" id="Vendo name" placeholder="Vendo name" value={VenderName} />
                         </div>
                         <div className="formGroup">
-                            <input type="text" name="paymentTerms" id="paymentTerms" placeholder="Cash / Cheque / Account Transfer" onChange={(e) => { SetPayment(e.target.value) }} />
+                            <input className='input' type="text" name="paymentTerms" id="paymentTerms" placeholder="Cash / Cheque / Account Transfer" onChange={(e) => { SetPayment(e.target.value) }} />
                         </div>
                         <div className="formGroup">
                             <span>
@@ -224,10 +225,10 @@ function Purchase() {
                                     <option value="no">No</option>
                                 </select>
                             </span>
-                            <input type="text" name="hmpyr" id="hmpyr" placeholder="In How Much Money you Purchase" onChange={(e) => { SetPurchasedMoney(e.target.value) }} />
+                            <input className='input' type="text" name="hmpyr" id="hmpyr" placeholder="In How Much Money you Purchase" onChange={(e) => { SetPurchasedMoney(e.target.value) }} />
                         </div>
                         <div className="formGroup">
-                            <input type="text" name="additionalNote" id="additionalNote" placeholder="Additional Info" onChange={(e) => { SetAdditionalNote(e.target.value) }} />
+                            <input className='input' type="text" name="additionalNote" id="additionalNote" placeholder="Additional Info" onChange={(e) => { SetAdditionalNote(e.target.value) }} />
                         </div>
                         <div style={{ display: 'flex:', justifyContent: 'center', alignItems: 'center', width: '100% important' }}>
                             <button type='submit' id="submit" onClick={AddPurchase} style={{ backgroundColor: 'orange', width: '150px', color: 'white' }}> Add Purchase </button>

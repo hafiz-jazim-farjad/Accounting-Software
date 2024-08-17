@@ -180,23 +180,23 @@ export default function EditVenders() {
                     <main className="main">
                         <h2>Edit Vendor Info</h2>
                         <div className="formGroup">
-                            <input value={Name} type="text" name="Name" id="Name" placeholder="Name" onChange={(e) => SetName(e.target.value)} />
+                            <input className='input' value={Name} type="text" name="Name" id="Name" placeholder="Name" onChange={(e) => SetName(e.target.value)} />
                         </div>
                         <div className="formGroup">
-                            <input value={Email} type="email" name="email" id="email" placeholder="Email Address" onChange={(e) => SetEmail(e.target.value)} />
-                            <input value={Contact} type="tel" name="contactNumber" id="contactNumber" placeholder="Contact Number" onChange={(e) => SetContact(e.target.value)} />
-                            <input value={ContactPerson} type="text" name="contactPerson" id="contactPerson" placeholder="Contact Person" onChange={(e) => SetContactPerson(e.target.value)} />
+                            <input className='input' value={Email} type="email" name="email" id="email" placeholder="Email Address" onChange={(e) => SetEmail(e.target.value)} />
+                            <input className='input' value={Contact} type="tel" name="contactNumber" id="contactNumber" placeholder="Contact Number" onChange={(e) => SetContact(e.target.value)} />
+                            <input className='input' value={ContactPerson} type="text" name="contactPerson" id="contactPerson" placeholder="Contact Person" onChange={(e) => SetContactPerson(e.target.value)} />
                         </div>
                         <div className="formGroup">
-                            <input value={Cnic} type="text" name="CNICnumber" id="CNICnumber" placeholder="CNIC Number" onChange={(e) => SetCnic(e.target.value)} />
-                            <input value={NtnNumber} type="text" name="NTNnumber" id="NTNnumber" placeholder="NTN Number" onChange={(e) => SetNtnNumber(e.target.value)} />
-                            <input value={StnNumber} type="text" name="STNnumber" id="STNnumber" placeholder="STN Number" onChange={(e) => SetStnNumber(e.target.value)} />
+                            <input className='input' value={Cnic} type="text" name="CNICnumber" id="CNICnumber" placeholder="CNIC Number" onChange={(e) => SetCnic(e.target.value)} />
+                            <input className='input' value={NtnNumber} type="text" name="NTNnumber" id="NTNnumber" placeholder="NTN Number" onChange={(e) => SetNtnNumber(e.target.value)} />
+                            <input className='input' value={StnNumber} type="text" name="STNnumber" id="STNnumber" placeholder="STN Number" onChange={(e) => SetStnNumber(e.target.value)} />
                         </div>
                         <div className="formGroup">
-                            <input value={Adress} type="text" name="address" id="address" placeholder="Address" onChange={(e) => SetAdress(e.target.value)} />
+                            <input className='input' value={Adress} type="text" name="address" id="address" placeholder="Address" onChange={(e) => SetAdress(e.target.value)} />
                         </div>
                         <div className="formGroup">
-                            <input value={AdditionalInfo} type="text" name="additionalNote" id="additionalNote" placeholder="Additional Info" onChange={(e) => SetAdditionalInfo(e.target.value)} />
+                            <input className='input' value={AdditionalInfo} type="text" name="additionalNote" id="additionalNote" placeholder="Additional Info" onChange={(e) => SetAdditionalInfo(e.target.value)} />
                         </div>
                         <button type="submit" id="submit" onClick={handleUpdate} style={{ backgroundColor: 'orange', width: '150px', color: 'white' }}>Update Vendor</button>
                     </main>

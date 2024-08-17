@@ -177,13 +177,13 @@ export default function EditPurchase() {
 <main class="main">
     <h2>Purchase</h2>
     <div class="formGroup">
-        <input value={PurchaseDate} type="date" name="date" id="date" placeholder="date" onChange={(e) => { SetPurchaseDate(e.target.value) }} />
-        <input value={VenderName} type="text" name="date" id="date" placeholder="date" disabled/>
-        <input value={VenderCode} type="text" name="date" id="date" placeholder="date" disabled/>
+        <input className='input' value={PurchaseDate} type="date" name="date" id="date" placeholder="date" onChange={(e) => { SetPurchaseDate(e.target.value) }} />
+        <input className='input' value={VenderName} type="text" name="date" id="date" placeholder="date" disabled/>
+        <input className='input' value={VenderCode} type="text" name="date" id="date" placeholder="date" disabled/>
     </div>
 
     <div class="formGroup">
-        <input value={Payment} type="text" name="paymentTerms" id="paymentTerms" placeholder="Cash / Cheque / Account Transfer" onChange={(e) => { SetPayment(e.target.value) }} />
+        <input className='input' value={Payment} type="text" name="paymentTerms" id="paymentTerms" placeholder="Cash / Cheque / Account Transfer" onChange={(e) => { SetPayment(e.target.value) }} />
     </div>
     <div class="formGroup">
         <span>
@@ -193,10 +193,10 @@ export default function EditPurchase() {
                 <option value="no">No</option>
             </select>
         </span>
-        <input type="text" name="hmpyr" id="hmpyr" value={PurchasedMoney} placeholder="In How Much Money you Purchase" onChange={(e) => { SetPurchasedMoney(e.target.value) }} />
+        <input className='input' type="text" name="hmpyr" id="hmpyr" value={PurchasedMoney} placeholder="In How Much Money you Purchase" onChange={(e) => { SetPurchasedMoney(e.target.value) }} />
     </div>
     <div class="formGroup">
-        <input type="text" name="additionalNote" id="additionalNote" value={AdditionalNote} placeholder="Additional Info" onChange={(e) => { SetAdditionalNote(e.target.value) }} />
+        <input className='input' type="text" name="additionalNote" id="additionalNote" value={AdditionalNote} placeholder="Additional Info" onChange={(e) => { SetAdditionalNote(e.target.value) }} />
     </div>
     <div style={{ display: 'flex:', justifyContent: 'center', alignItems: 'center', width: '100% important' }}>
         <button type='submit' id="submit" onClick={EditPurchase} style={{ backgroundColor: 'orange', width: '150px', color: 'white' }}> Edit Purchase </button>

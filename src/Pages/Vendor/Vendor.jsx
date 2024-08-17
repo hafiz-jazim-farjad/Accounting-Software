@@ -93,7 +93,8 @@ export default function Vendor() {
                 icon: 'error',
                 showConfirmButton: false,
                 showCancelButton: false
-            })        }
+            })
+        }
 
 
     }
@@ -199,33 +200,33 @@ export default function Vendor() {
                         <h2>Vendor Infomation</h2>
                         <div class="formGroup">
                             {/* code auto generate krna hy */}
-                            <input type="text" name="Code" id="Code" placeholder="Code will auto grnerate" disabled />
-                            <input type="text" name="GLCode" id="GLCode" placeholder="GLCode will auto grnerate" disabled />
-                            <input type="text" name="Name" id="Name" placeholder=" Name" onChange={(e) => SetName(e.target.value)} />
+                            <input className='input' type="text" name="Code" id="Code" placeholder="Code will auto grnerate" disabled />
+                            <input className='input' type="text" name="GLCode" id="GLCode" placeholder="GLCode will auto grnerate" disabled />
+                            <input className='input' type="text" name="Name" id="Name" placeholder=" Name" onChange={(e) => SetName(e.target.value)} />
                         </div>
 
                         <div class="formGroup">
-                            <input type="email" name="email" id="email" placeholder=" Email Address" onChange={(e) => SetEmail(e.target.value)} />
-                            <input type="tel" name="contactNumber" id="contactNumber" placeholder=" Contact Number" onChange={(e) => SetContact(e.target.value)} />
-                            <input type="text" name="contactPerson" id="contactPerson" placeholder="Contact Person" onChange={(e) => SetContactPerson(e.target.value)} />
+                            <input className='input' type="email" name="email" id="email" placeholder=" Email Address" onChange={(e) => SetEmail(e.target.value)} />
+                            <input className='input' type="tel" name="contactNumber" id="contactNumber" placeholder=" Contact Number" onChange={(e) => SetContact(e.target.value)} />
+                            <input className='input' type="text" name="contactPerson" id="contactPerson" placeholder="Contact Person" onChange={(e) => SetContactPerson(e.target.value)} />
                         </div>
                         <div class="formGroup">
-                            <input type="text" name="CNICnumber" id="CNICnumber" placeholder="CNIC Number" onChange={(e) => SetCnic(e.target.value)} />
+                            <input className='input' type="text" name="CNICnumber" id="CNICnumber" placeholder="CNIC Number" onChange={(e) => SetCnic(e.target.value)} />
                             {/* stn or ntn me sy koi b ek dal dy ya dono dal dy agar ho tw */}
-                            <input type="text" name="NTNnumber" id="NTNnumber" placeholder="NTN Number" onChange={(e) => SetNtnNumber(e.target.value)} />
-                            <input type="text" name="STNnumber" id="STNnumber" placeholder="STN Number" onChange={(e) => SetStnNumber(e.target.value)} />
+                            <input className='input' type="text" name="NTNnumber" id="NTNnumber" placeholder="NTN Number" onChange={(e) => SetNtnNumber(e.target.value)} />
+                            <input className='input' type="text" name="STNnumber" id="STNnumber" placeholder="STN Number" onChange={(e) => SetStnNumber(e.target.value)} />
                         </div>
 
                         <div class="formGroup">
-                            <input type="text" name="address" id="address" placeholder="Address" onChange={(e) => SetAdress(e.target.value)} />
+                            <input className='input' type="text" name="address" id="address" placeholder="Address" onChange={(e) => SetAdress(e.target.value)} />
                         </div>
 
                         <div class="formGroup">
-                            <input type="text" name="additionalNote" id="additionalNote" placeholder="Which Product you Buy From This Vender" onChange={(e) => SetAdditionalInfo(e.target.value)} />
+                            <input className='input' type="text" name="additionalNote" id="additionalNote" placeholder="Which Product you Buy From This Vender" onChange={(e) => SetAdditionalInfo(e.target.value)} />
                         </div>
-                        <div style={{display:'flex:',justifyContent:'center' , alignItems:'center' , width:'100% important'}}>
-                        <button type='submit' id="submit" onClick={AddVender}style={{backgroundColor:'orange' , width:'150px' , color:'white'}}> Add Vender </button>
-                      <p>f</p> <Link to="/SeeVenders" ><button type='submit' style={{backgroundColor:'orange' , width:'150px' , color:'white'}}> See Vender</button></Link>
+                        <div style={{ display: 'flex:', justifyContent: 'center', alignItems: 'center', width: '100% important' }}>
+                            <button type='submit' id="submit" onClick={AddVender} style={{ backgroundColor: 'orange', width: '150px', color: 'white' }}> Add Vender </button>
+                            <p>f</p> <Link to="/SeeVenders" ><button type='submit' style={{ backgroundColor: 'orange', width: '150px', color: 'white' }}> See Vender</button></Link>
                         </div>
                     </main>
 

@@ -121,12 +121,12 @@ function UOM() {
             <h2>Unit Of Measurment</h2>
             <div class="formGroup">
                 {/* code auto generate krna hy */}
-                <input type="text" name="Code" id="Code" placeholder=" Code" autofocus />
-                <input type="text" name="Name" id="Name" placeholder=" Name" />
+                <input className='input' type="text" name="Code" id="Code" placeholder=" Code" autofocus />
+                <input className='input' type="text" name="Name" id="Name" placeholder=" Name" />
             </div>
 
             <div class="formGroup">
-                <input type="text" name="additionalNote" id="additionalNote" placeholder="Additional Info" />
+                <input className='input' type="text" name="additionalNote" id="additionalNote" placeholder="Additional Info" />
             </div>
             <button type="submit" id="submit" onclick="addUOM()"> Save </button>
         </main>

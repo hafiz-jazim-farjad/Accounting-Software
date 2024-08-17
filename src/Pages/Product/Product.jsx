@@ -82,34 +82,34 @@ function Product() {
 
         if (Name && ImportOrLocal && ProductNature && AdditionalInfo) {
 
-        try {
-            const docRef = await addDoc(collection(db, "Products"), {
-                ProductRandomCode,
-                Name,
-                ImportOrLocal,
-                ProductNature,
-                AdditionalInfo,
-            });
+            try {
+                const docRef = await addDoc(collection(db, "Products"), {
+                    ProductRandomCode,
+                    Name,
+                    ImportOrLocal,
+                    ProductNature,
+                    AdditionalInfo,
+                });
 
-            console.log("Document written with ID: ", docRef.id);
-            Swal.fire({
-                title: 'Product Added Successfully',
-                text: 'Product Added',
-                icon: 'success',
-                showConfirmButton: false,
-                showCancelButton: false
-            })
-            document.getElementById("Name").value = '';
-            document.getElementById("ImportOrLocal").value = '';
-            document.getElementById("ProductNature").value = '';
-            document.getElementById("AdditionalInfo").value = '';
-            setTimeout(() => {
-                window.location = "/SeeProducts"
-            }, 2000);
+                console.log("Document written with ID: ", docRef.id);
+                Swal.fire({
+                    title: 'Product Added Successfully',
+                    text: 'Product Added',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    showCancelButton: false
+                })
+                document.getElementById("Name").value = '';
+                document.getElementById("ImportOrLocal").value = '';
+                document.getElementById("ProductNature").value = '';
+                document.getElementById("AdditionalInfo").value = '';
+                setTimeout(() => {
+                    window.location = "/SeeProducts"
+                }, 2000);
 
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
 
 
         } else {
@@ -119,7 +119,8 @@ function Product() {
                 icon: 'error',
                 showConfirmButton: false,
                 showCancelButton: false
-            })        }
+            })
+        }
 
 
     }
@@ -166,8 +167,8 @@ function Product() {
                         <h2>Product Infomation</h2>
                         <div class="formGroup">
                             {/* code auto generate krna hy  */}
-                            <input type="text" name="Code" id="Code" placeholder=" Code Will Generate Auto" disabled />
-                            <input type="text" name="Name" id="Name" placeholder=" Name" onChange={(e) => { SetName(e.target.value) }} />
+                            <input className='input' type="text" name="Code" id="Code" placeholder=" Code Will Generate Auto" disabled />
+                            <input className='input' type="text" name="Name" id="Name" placeholder=" Name" onChange={(e) => { SetName(e.target.value) }} />
                         </div>
 
                         <div class="formGroup">
@@ -188,11 +189,11 @@ function Product() {
 
                         </div>
                         <div class="formGroup">
-                            <input type="text" name="additionalNote" id="AdditionalInfo" placeholder="Additional Info" onChange={(e) => { SetAdditionalInfo(e.target.value) }} />
+                            <input className='input' type="text" name="additionalNote" id="AdditionalInfo" placeholder="Additional Info" onChange={(e) => { SetAdditionalInfo(e.target.value) }} />
                         </div>
-                        <div style={{display:'flex:',justifyContent:'center' , alignItems:'center' , width:'100% important'}}>
-                        <button type='submit' id="submit" onClick={AddProducts}style={{backgroundColor:'orange' , width:'150px' , color:'white'}}> Add Product </button>
-                      <p>f</p> <Link to="/SeeProducts" ><button type='submit' style={{backgroundColor:'orange' , width:'150px' , color:'white'}}> See Product</button></Link>
+                        <div style={{ display: 'flex:', justifyContent: 'center', alignItems: 'center', width: '100% important' }}>
+                            <button type='submit' id="submit" onClick={AddProducts} style={{ backgroundColor: 'orange', width: '150px', color: 'white' }}> Add Product </button>
+                            <p>f</p> <Link to="/SeeProducts" ><button type='submit' style={{ backgroundColor: 'orange', width: '150px', color: 'white' }}> See Product</button></Link>
                         </div>
                     </main>
 

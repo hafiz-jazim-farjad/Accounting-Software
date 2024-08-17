@@ -182,27 +182,27 @@ function Sale() {
                         <h2>Sales Record</h2>
 
                         <div class="formGroup">
-                            <input type="text" name="customerName" id="customerName" placeholder="Customer Name" autofocus onChange={(e) => { SetName(e.target.value) }} />
-                            <input type="tel" name="contactNumber" id="contactNumber" placeholder="Contact Number" onChange={(e) => { SetContact(e.target.value) }} />
+                            <input className='input' type="text" name="customerName" id="customerName" placeholder="Customer Name" autofocus onChange={(e) => { SetName(e.target.value) }} />
+                            <input className='input' type="tel" name="contactNumber" id="contactNumber" placeholder="Contact Number" onChange={(e) => { SetContact(e.target.value) }} />
                         </div>
 
                         <div class="formGroup">
-                            <input type="email" name="email" id="email" placeholder="Customer Email Address" onChange={(e) => { SetEmail(e.target.value) }} />
-                            <input type="text" name="product" id="product" placeholder="Product Name" onChange={(e) => { SetProductName(e.target.value) }} />
+                            <input className='input' type="email" name="email" id="email" placeholder="Customer Email Address" onChange={(e) => { SetEmail(e.target.value) }} />
+                            <input className='input' type="text" name="product" id="product" placeholder="Product Name" onChange={(e) => { SetProductName(e.target.value) }} />
                         </div>
 
                         <div class="formGroup">
-                            <input type="number" name="quantity" id="quantity" placeholder="Quantity" onChange={(e) => { SetQuantity(e.target.value) }} />
-                            <input type="number" name="price" id="price" placeholder="Enter Sale Price" onChange={(e) => { SetSaledPrice(e.target.value) }} />
+                            <input className='input' type="number" name="quantity" id="quantity" placeholder="Quantity" onChange={(e) => { SetQuantity(e.target.value) }} />
+                            <input className='input' type="number" name="price" id="price" placeholder="Enter Sale Price" onChange={(e) => { SetSaledPrice(e.target.value) }} />
                         </div>
 
                         <div class="formGroup">
-                            <input type="date" name="saleDate" id="saleDate" placeholder="Sale Date" onChange={(e) => { SetDeliveryDate(e.target.value) }} />
-                            <input type="text" name="paymentMethod" id="paymentMethod" placeholder="Cash / Cheque / Account Transfer" onChange={(e) => { SetPayment(e.target.value) }} />
+                            <input className='input' type="date" name="saleDate" id="saleDate" placeholder="Sale Date" onChange={(e) => { SetDeliveryDate(e.target.value) }} />
+                            <input className='input' type="text" name="paymentMethod" id="paymentMethod" placeholder="Cash / Cheque / Account Transfer" onChange={(e) => { SetPayment(e.target.value) }} />
                         </div>
 
                         <div class="formGroup">
-                            <input type="text" name="additionalNote" id="additionalNote"
+                            <input className='input' type="text" name="additionalNote" id="additionalNote"
                                 placeholder="Additional Note About the Selled Product" onChange={(e) => { SetAdditionalNote(e.target.value) }} />
                         </div>
                         <div style={{ display: 'flex:', justifyContent: 'center', alignItems: 'center', width: '100% important' }}>

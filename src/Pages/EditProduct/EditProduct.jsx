@@ -214,14 +214,14 @@ export default function EditProduct() {
                     <main className="main">
                         <h2>Product Information</h2>
                         <div className="formGroup">
-                            <input
+                            <input className='input'
                                 type="text"
                                 name="Code"
                                 id="Code"
                                 placeholder="Code Will Generate Auto"
                                 disabled
                             />
-                            <input
+                            <input className='input'
                                 type="text"
                                 name="Name"
                                 id="Name"
@@ -258,7 +258,7 @@ export default function EditProduct() {
                             </select>
                         </div>
                         <div className="formGroup">
-                            <input
+                            <input className='input'
                                 type="text"
                                 name="additionalNote"
                                 id="AdditionalInfo"
