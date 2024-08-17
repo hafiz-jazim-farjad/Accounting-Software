@@ -1,23 +1,16 @@
 import React from 'react'
 import '../../App.css'
 import { Link } from 'react-router-dom'
-import { useState, useEffect , createContext } from 'react'
+import { useState, useEffect } from 'react'
 import { auth } from '../../Firebase/Firebase'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, query, collection, getDocs, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../Firebase/Firebase'
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
-export default function SeeVenders() {
+export default function SeePurchases() {
 
     const [name, setName] = useState('')
-    const [Vender, SetVenders] = useState([])
-
-
-    const VenderRandomCode = Math.floor(Math.random() * 100000)
-    const VenderGlCode = Math.floor(Math.random() * 100000)
-    const VenderGlCodeFull = "PK" + VenderGlCode
-
 
     useEffect(() => {
 
@@ -92,24 +85,30 @@ export default function SeeVenders() {
     }
 
 
-    async function getVenders() {
-        const q = query(collection(db, "Venders"));
+    async function GetPurchases() {
+        const q = query(collection(db, "Purchase"));
         const querySnapshot = await getDocs(q);
 
         let rows = "";
+
         querySnapshot.forEach((doc) => {
-            const Vender = doc.data();
+            const Purchases = doc.data();
+
+            // Create a unique identifier for each row to pass to OpenDetail
             const rowId = doc.id;
+
+            // Add the row to the table
+
             rows += `
             <tr data-id="${rowId}">
-                <td>${Vender.Name}</td>
-                <td className="mobile-header">${Vender.Email}</td>
-                <td className="mobile-header">${Vender.Contact}</td>
-                <td className="mobile-header">${Vender.Cnic}</td>
-                <td className="mobile-header">${Vender.Adress}</td>
-                <td className="mobile-header">${Vender.AdditionalInfo}</td>
+                <td>${Purchases.VenderName}</td>
+                <td className="mobile-header">${Purchases.VenderCode}</td>
+                <td className="mobile-header">${Purchases.PurchaseDate}</td>
+                <td className="mobile-header">${Purchases.PurchasedMoney}</td>
+                <td className="mobile-header">${Purchases.Payment}</td>
             </tr>
             `;
+
         });
 
         // Insert rows into the table body
@@ -127,33 +126,31 @@ export default function SeeVenders() {
 
     async function OpenDetail(rowId) {
         // Fetch the specific vendor document based on the rowId
-        const docRef = doc(db, "Venders", rowId);
+        const docRef = doc(db, "Purchase", rowId);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            const Vender = docSnap.data();
+            const Customer = docSnap.data();
 
             Swal.fire({
-                title: '<strong>Vender Details</strong>',
+                title: '<strong>Purchased Details</strong>',
                 icon: 'success',
                 html: `
                 <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <h5><strong>Vender Name:</strong> ${Vender.Name}</h5>
-                            <h5><strong>Product Code:</strong> ${Vender.Code}</h5>
-                            <h5><strong>GLCode:</strong> ${Vender.GLCode}</h5>
-                            <h5><strong>Email:</strong> ${Vender.Email}</h5>
-                            <h5><strong>Contact:</strong> ${Vender.Contact}</h5>
-                            <h5><strong>Contact Person:</strong> ${Vender.ContactPerson}</h5>
-                            <h5><strong>CNIC:</strong> ${Vender.Cnic}</h5>
-                            <h5><strong>NTN Number:</strong> ${Vender.NtnNumber}</h5>
-                            <h5><strong>STN Number:</strong> ${Vender.StnNumber}</h5>
-                            <h5><strong>Address:</strong> ${Vender.Adress}</h5>
-                            <h5><strong>Additional Info:</strong> ${Vender.AdditionalInfo}</h5>
-                        </div>
-                    </div>
-                </div>
+    <div className="row" style="display: flex justify-content: center; align-items: center;; flex-wrap: wrap;">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+    <h5 style="margin-right: 20px;"><strong>Purchased Code:</strong> ${Customer.PurchaseCode}</h5>
+            <h5 style="margin-right: 20px;"><strong>VenderName:</strong> ${Customer.VenderName}</h5>
+            <h5 style="margin-right: 20px;"><strong>VenderCode:</strong> ${Customer.VenderCode}</h5>
+            <h5 style="margin-right: 20px;"><strong>PurchaseDate:</strong> ${Customer.PurchaseDate}</h5>
+            <h5 style="margin-right: 20px;"><strong>PurchasedMoney:</strong> ${Customer.PurchasedMoney}</h5>
+            <h5 style="margin-right: 20px;"><strong>Payment:</strong> ${Customer.Payment}</h5>
+            <h5 style="margin-right: 20px;"><strong>AdvancePayment:</strong> ${Customer.AdvancePaymentOrNot}</h5>
+            <h5 style="margin-right: 20px;"><strong>AdditionalNote:</strong> ${Customer.AdditionalNote}</h5>
+        </div>
+    </div>
+</div>
+
                 `,
                 showCloseButton: true,
                 showConfirmButton: true,
@@ -167,7 +164,7 @@ export default function SeeVenders() {
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: 'Are you sure?',
-                        text: "You want to delete this Vender!",
+                        text: "You want to delete this Purchase!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
@@ -175,7 +172,7 @@ export default function SeeVenders() {
                         confirmButtonText: 'Yes, delete it!'
                     }).then(async (result) => {
                         if (result.isConfirmed) {
-                            const postRef = doc(db, "Venders", rowId);
+                            const postRef = doc(db, "Purchase", rowId);
                             try {
                                 await deleteDoc(postRef);
                             } catch (error) {
@@ -184,14 +181,15 @@ export default function SeeVenders() {
                             Swal.fire({
                                 position: 'center',
                                 icon: 'success',
-                                title: 'Vender has been deleted Successfully',
+                                title: 'Purchase has been deleted Successfully',
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-                        } 
+                        }
                     })
-                }else if(result.dismiss === Swal.DismissReason.cancel) {
-                   window.location=`/EditVenders/id/:${rowId}`
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    window.location = `/EditPurchase/id/:${rowId}`
+
                 }
             })
         } else {
@@ -207,14 +205,14 @@ export default function SeeVenders() {
 
 
 
-    getVenders();
+    GetPurchases();
 
-    console.log(Vender);
 
 
 
 
     return (
+
         <main className="DashboardMain">
             <div className="DashboardleftSideBar">
                 <h2>Dashboard</h2>
@@ -255,15 +253,14 @@ export default function SeeVenders() {
                     {/* <div className="Productbody" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow:'hidden ' }}> */}
                     {/* <p>Click the names to see more data.</p> */}
 
-                    <table style={{ width: '100%' , cursor:'alias' }}>
+                    <table style={{ width: '100%', cursor: 'alias' }}>
                         <thead>
                             <tr className="table-headers" style={{ fontSize: '12px', overflow: 'scroll' }}>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Contact1</th>
-                                <th>CNIC</th>
-                                <th>Adress</th>
-                                <th>Additional Info</th>
+                                <th>Vender Name</th>
+                                <th>Vender Code</th>
+                                <th>Purchased Date</th>
+                                <th>Purchased Price</th>
+                                <th>Payment Method</th>
                             </tr>
                         </thead>
                         {/* <tbody style={{ overflow: 'scroll', height: '100px !important' }} id='TableBody' > */}
@@ -291,5 +288,7 @@ export default function SeeVenders() {
 
             </div>
         </main>
+
+
     )
 }

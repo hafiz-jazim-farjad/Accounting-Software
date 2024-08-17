@@ -73,7 +73,7 @@ export default function EditProduct() {
                 showConfirmButton: false,
                 timer: 1500,
             });
-            window.location = '/SeeVenders';
+            window.location = '/SeeProducts';
         } catch (error) {
             Swal.fire({
                 title: 'Error',
