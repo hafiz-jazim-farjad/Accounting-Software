@@ -221,7 +221,7 @@ export default function Vendor() {
                         </div>
 
                         <div class="formGroup">
-                            <input type="text" name="additionalNote" id="additionalNote" placeholder="Additional Info" onChange={(e) => SetAdditionalInfo(e.target.value)} />
+                            <input type="text" name="additionalNote" id="additionalNote" placeholder="Which Product you Buy From This Vender" onChange={(e) => SetAdditionalInfo(e.target.value)} />
                         </div>
                         <div style={{display:'flex:',justifyContent:'center' , alignItems:'center' , width:'100% important'}}>
                         <button type='submit' id="submit" onClick={AddVender}style={{backgroundColor:'orange' , width:'150px' , color:'white'}}> Add Vender </button>
