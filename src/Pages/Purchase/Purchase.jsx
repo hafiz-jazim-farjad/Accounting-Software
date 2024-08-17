@@ -27,51 +27,51 @@ function Purchase() {
         });
 
         // Function to populate the Vender Code select element
-        const func = async () => {
-            const q = query(collection(db, "Venders"));
-            const querySnapshot = await getDocs(q);
-            const selectElement = venderCodeRef.current; // Use ref to get the element
-            if (selectElement) {
-                selectElement.innerHTML = '';
-
-                // Store Vender data in a way that can be accessed later
-                let venderData = {};
-
-                // Add a default "Select" option with an empty value
-                selectElement.innerHTML += `<option value="" disabled selected>Select Vender Code</option>`;
-
-                querySnapshot.forEach((doc) => {
-                    const Vender = doc.data();
-                    const code = Vender.Code;
-                    const name = Vender.Name; // Get Vender.Name
-                    const Product = Vender.AdditionalInfo; // Get Vender.Name
-
-                    // Store both code and name in the venderData object
-                    venderData[code] = {
-                        name: name,
-                        code: code
-                    };
-
-                    // Add option element directly
-                    selectElement.innerHTML += `<option value="${code}">${Product} ${code}</option>`;
-                });
-
-                // Event listener for dropdown change
-                selectElement.addEventListener('change', (event) => {
-                    const selectedCode = event.target.value;
-                    if (selectedCode) { // Check if a valid option is selected
-                        const selectedData = venderData[selectedCode]; // Retrieve Vender data using code
-                        if (selectedData) {
-                            detailFunction(selectedData.name, selectedData.code); // Call the detail function with Vender.Name and Vender.Code
-                        }
-                    }
-                });
-            }
-        };
-
-        func();
+       
     }, []);
+    const func = async () => {
+        const q = query(collection(db, "Venders"));
+        const querySnapshot = await getDocs(q);
+        const selectElement = venderCodeRef.current; // Use ref to get the element
+        if (selectElement) {
+            selectElement.innerHTML = '';
 
+            // Store Vender data in a way that can be accessed later
+            let venderData = {};
+
+            // Add a default "Select" option with an empty value
+            selectElement.innerHTML += `<option value="" disabled selected>Select Vender Code</option>`;
+
+            querySnapshot.forEach((doc) => {
+                const Vender = doc.data();
+                const code = Vender.Code;
+                const name = Vender.Name; // Get Vender.Name
+                const Product = Vender.AdditionalInfo; // Get Vender.Name
+
+                // Store both code and name in the venderData object
+                venderData[code] = {
+                    name: name,
+                    code: code
+                };
+
+                // Add option element directly
+                selectElement.innerHTML += `<option value="${code}">${Product} ${code}</option>`;
+            });
+
+            // Event listener for dropdown change
+            selectElement.addEventListener('change', (event) => {
+                const selectedCode = event.target.value;
+                if (selectedCode) { // Check if a valid option is selected
+                    const selectedData = venderData[selectedCode]; // Retrieve Vender data using code
+                    if (selectedData) {
+                        detailFunction(selectedData.name, selectedData.code); // Call the detail function with Vender.Name and Vender.Code
+                    }
+                }
+            });
+        }
+    };
+
+    func();
     // Define the detail function
     const detailFunction = (name, code) => {
         console.log("Vender Name:", name);

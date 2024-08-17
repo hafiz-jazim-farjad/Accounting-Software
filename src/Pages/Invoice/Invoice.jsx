@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import html2canvas from 'html2canvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Invoice.css';
@@ -7,9 +7,12 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react'
 import { auth } from '../../Firebase/Firebase'
 import { onAuthStateChanged, signOut } from "firebase/auth";
-
+import { query, collection, getDocs } from 'firebase/firestore';
+import { db } from '../../Firebase/Firebase';
 
 const Invoice = () => {
+    const venderCodeRef = useRef(null); // Create a ref for the select element
+
     const [invoiceDetails, setInvoiceDetails] = useState({
         companyLogo: Logo,
         companyName: 'TechMancy Co.',
@@ -81,19 +84,19 @@ const Invoice = () => {
     const totalAmount = invoiceDetails.items.reduce((total, item) => total + item.quantity * item.price, 0);
     const [name, setName] = useState('')
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        
+
         onAuthStateChanged(auth, (user) => {
-        if (user) {
-            setName(user.email)
-        } else {
-        }
-        if (!user) {
-            window.location = "/Login"
-        }
-    });
-})
+            if (user) {
+                setName(user.email)
+            } else {
+            }
+            if (!user) {
+                window.location = "/Login"
+            }
+        });
+    })
 
     // for date 
     let forDayInWords = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursady', 'Friday', 'Saturday']
@@ -152,6 +155,98 @@ const Invoice = () => {
             // An error happened.
         });
     }
+
+
+
+
+
+
+    // This is the Dynamic Invoice Generation Code
+
+
+    const SalesData = async () => {
+        const q = query(collection(db, "Sales"));
+        const querySnapshot = await getDocs(q);
+        const selectElement = document.getElementById("sales"); // Use ref to get the element
+        if (selectElement) {
+            selectElement.innerHTML = '';
+
+            let venderData = {};
+
+            selectElement.innerHTML += `<option value="" disabled selected>Select Vender Code</option>`;
+
+            querySnapshot.forEach((doc) => {
+                const Vender = doc.data();
+                const Name = Vender.Name;
+                const DeliveryDate = Vender.DeliveryDate; // Get Vender.Name
+                const Email = Vender.Email; // Get Vender.Name
+                const Contact = Vender.Contact; // Get Vender.Name
+                const Payment = Vender.Payment; // Get Vender.Name
+                const ProductName = Vender.ProductName; // Get Vender.Name
+                const Quantity = Vender.Quantity; // Get Vender.Name
+                const SaledPrice = Vender.SaledPrice; // Get Vender.Name
+                const AdditionalNote = Vender.AdditionalNote; // Get Vender.Name
+
+                // Store both code and name in the venderData object
+                venderData = {
+                    Name: Name,
+                    DeliveryDate: DeliveryDate,
+                    Email: Email,
+                    Contact: Contact,
+                    Payment: Payment,
+                    ProductName: ProductName,
+                    Quantity: Quantity,
+                    SaledPrice: SaledPrice,
+                    AdditionalNote: AdditionalNote
+                };
+
+                // Add option element directly
+                selectElement.innerHTML += `<option value="${Name}">${Name} ${DeliveryDate}</option>`;
+            });
+
+            // Event listener for dropdown change
+            selectElement.addEventListener('change', (event) => {
+                const selectedCode = event.target.value;
+                if (selectedCode) { // Check if a valid option is selected
+                    const selectedData = venderData[selectedCode]; // Retrieve Vender data using code
+                    if (selectedData) {
+                        detailFunction(selectedData.Name,
+                            selectedData.DeliveryDate,
+                            selectedData.Email,
+                            selectedData.Contact,
+                            selectedData.Payment,
+                            selectedData.ProductName,
+                            selectedData.Quantity,
+                            selectedData.SaledPrice,
+                            selectedData.AdditionalNote); // Call the detail function with Vender.Name and Vender.Code
+                    }
+                }
+            });
+        }
+    };
+
+    SalesData();
+
+    // Define the detail function
+    const detailFunction = (Name,
+        DeliveryDate,
+        Email,
+        Contact,
+        Payment,
+        ProductName,
+        Quantity,
+        SaledPrice,
+        AdditionalNote) => {
+        console.log("Vender Name:", Name);
+        console.log("Vender Code:", DeliveryDate);
+        // SetVenderName(name);
+        // SetVenderCode(code);
+    };
+
+
+
+
+
     return (
         <main className="DashboardMain">
             <div className="DashboardleftSideBar">
@@ -196,7 +291,8 @@ const Invoice = () => {
                                 <div className=" d-flex align-items-center justify-content-around mb-3 p-2" style={{ backgroundColor: '#FFB938', color: 'black', borderRadius: '10px' }}>
                                     <input className="text-black" type="file" onChange={handleFileChange} accept="image/*" />
 
-                                    <h2 className="text-black">Invoice {invoiceDetails.invoiceNumber}</h2>
+                                    <select name="Sales" id="sales">
+                                    </select>
 
                                     <button className="btn btn-light" onClick={captureInvoice}> Download Invoice as Image</button>
                                 </div>
