@@ -8,12 +8,12 @@ export default function SignUp() {
 
     // These are the States
     let [email, setEmail] = useState('')
-    let [password, setPassword] = useState('') 
+    let [password, setPassword] = useState('')
 
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
-                window.location = "/Dashboard"
+            window.location = "/Dashboard"
         } else {
         }
     });
@@ -36,19 +36,19 @@ export default function SignUp() {
             });
     }
 
-const ToSignup = ()=>{
-    window.location = "/SignUp"
-}
+    const ToSignup = () => {
+        window.location = "/SignUp"
+    }
 
     return (
         <main class="main">
-            <div style={{display:'flex' , justifyContent:'center' , alignItems:'center' , flexDirection:'column' , rowGap:'10px'}}>
-
-            <h2>Login</h2>
-            <input type="text" name="user" id="user" placeholder="username / email" autofocus class="LoginInputs input" onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" name="Password" id="Password" placeholder="Password" class="LoginInputs input" onChange={(e) => setPassword(e.target.value)} />
-            <button type="submit" onClick={LoginUser} id="submit" > Login </button>
-            {/* <button  onClick={ToSignup} style={{backgroundColor:'transparent' , border:'none'}} > SignUp </button> */}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', rowGap: '10px' }}>
+                <h2>Data Management Software - <a href="http://techmancy.com" target='_blank'>TechMancy</a> </h2>
+                <h2>Login</h2>
+                <input type="text" name="user" id="user" placeholder="username / email" autofocus class="LoginInputs input" onChange={(e) => setEmail(e.target.value)} />
+                <input type="password" name="Password" id="Password" placeholder="Password" class="LoginInputs input" onChange={(e) => setPassword(e.target.value)} />
+                <button type="submit" onClick={LoginUser} id="submit" > Login </button>
+                <button onClick={ToSignup} style={{ backgroundColor: 'transparent', border: 'none' }} > SignUp </button>
             </div>
         </main>
     )
