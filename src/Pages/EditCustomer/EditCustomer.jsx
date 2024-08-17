@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 export default function EditCustomer() {
 
     const [name, setName] = useState('');
-    
+
     const [Name, SetName] = useState('');
     const [Contact, SetContact] = useState('');
     const [Email, SetEmail] = useState('');
@@ -21,7 +21,7 @@ export default function EditCustomer() {
     const [Payment, SetPayment] = useState('');
     const [AdditionalNote, SetAdditionalNote] = useState('');
     // State variables for vendor data
-  
+
 
     // Get the current URL from the browser
     const url = window.location.href;
@@ -86,17 +86,17 @@ export default function EditCustomer() {
                 Payment,
                 AdditionalNote
             });
-            
+
             Swal.fire({
-                    title: 'Customer Updated Successfully',
-                    text: 'Customer information has been updated.',
-                    icon: 'success',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                setTimeout(()=>{
-                    window.location="/SeeCustomers"
-                } , 2000)
+                title: 'Customer Updated Successfully',
+                text: 'Customer information has been updated.',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setTimeout(() => {
+                window.location = "/SeeCustomers"
+            }, 2000)
         } catch (error) {
             Swal.fire({
                 title: 'Error',
@@ -150,13 +150,13 @@ export default function EditCustomer() {
                 <h2>Dashboard</h2>
                 <ul>
                     <Link to="/Dashboard"><li>Dashboard</li></Link>
-                    <Link to="/Vendor"><li>Add Vendor</li></Link>
+                    <Link to="/Vendor"><li>Vendor</li></Link>
                     <Link to="/Customer"><li>Customer</li></Link>
-                    <Link to="/Sale"><li>Sale</li></Link>
-                    <Link to="/Purchase"><li>Purchase</li></Link>
                     <Link to="/Product"><li>Product</li></Link>
-                    <Link to="/Invoice"><li>Invoice</li></Link>
                     <Link to="/UOM"><li>UOM</li></Link>
+                    <Link to="/Purchase"><li>Purchase</li></Link>
+                    <Link to="/Invoice"><li>Invoice</li></Link>
+                    <Link to="/Sale"><li>Sale</li></Link>
                     <Link to="/Attendance"><li>Attendance</li></Link>
                     <Link to="/Employee"><li>Employee</li></Link>
                     <Link to="/Salary"><li>Salary</li></Link>

@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../App.css'
 import { Link } from 'react-router-dom'
-import { useState, useEffect , createContext } from 'react'
+import { useState, useEffect, createContext } from 'react'
 import { auth } from '../../Firebase/Firebase'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, query, collection, getDocs, deleteDoc, updateDoc } from 'firebase/firestore';
@@ -188,10 +188,10 @@ export default function SeeVenders() {
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-                        } 
+                        }
                     })
-                }else if(result.dismiss === Swal.DismissReason.cancel) {
-                   window.location=`/EditVenders/id/:${rowId}`
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    window.location = `/EditVenders/id/:${rowId}`
                 }
             })
         } else {
@@ -222,11 +222,11 @@ export default function SeeVenders() {
                     <Link to="/Dashboard"><li>Dashboard</li></Link>
                     <Link to="/Vendor"><li>Vendor</li></Link>
                     <Link to="/Customer"><li>Customer</li></Link>
-                    <Link to="/Sale"><li>Sale</li></Link>
-                    <Link to="/Purchase"><li>Purchase</li></Link>
                     <Link to="/Product"><li>Product</li></Link>
-                    <Link to="/Invoice"><li>Invoice</li></Link>
                     <Link to="/UOM"><li>UOM</li></Link>
+                    <Link to="/Purchase"><li>Purchase</li></Link>
+                    <Link to="/Invoice"><li>Invoice</li></Link>
+                    <Link to="/Sale"><li>Sale</li></Link>
                     <Link to="/Attendance"><li>Attendance</li></Link>
                     <Link to="/Employee"><li>Employee</li></Link>
                     <Link to="/Salary"><li>Salary</li></Link>
@@ -255,7 +255,7 @@ export default function SeeVenders() {
                     {/* <div className="Productbody" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow:'hidden ' }}> */}
                     {/* <p>Click the names to see more data.</p> */}
 
-                    <table style={{ width: '100%' , cursor:'alias' }}>
+                    <table style={{ width: '100%', cursor: 'alias' }}>
                         <thead>
                             <tr className="table-headers" style={{ fontSize: '12px', overflow: 'scroll' }}>
                                 <th>Name</th>

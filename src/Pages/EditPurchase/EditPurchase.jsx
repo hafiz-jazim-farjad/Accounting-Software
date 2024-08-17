@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 export default function EditPurchase() {
 
     const [name, setName] = useState('');
-    
+
     const [PurchaseDate, SetPurchaseDate] = useState('');
     const [VenderName, SetVenderName] = useState('');
     const [Payment, SetPayment] = useState('');
@@ -19,7 +19,7 @@ export default function EditPurchase() {
     const [AdditionalNote, SetAdditionalNote] = useState('');
     const [VenderCode, SetVenderCode] = useState('');
     // State variables for vendor data
-  
+
 
     // Get the current URL from the browser
     const url = window.location.href;
@@ -78,17 +78,17 @@ export default function EditPurchase() {
                 PurchasedMoney,
                 AdditionalNote,
             });
-            
+
             Swal.fire({
-                    title: 'Purchase Updated Successfully',
-                    text: 'Purchase information has been updated.',
-                    icon: 'success',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                setTimeout(()=>{
-                    window.location="/SeePurchases"
-                } , 2000)
+                title: 'Purchase Updated Successfully',
+                text: 'Purchase information has been updated.',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setTimeout(() => {
+                window.location = "/SeePurchases"
+            }, 2000)
         } catch (error) {
             Swal.fire({
                 title: 'Error',
@@ -142,13 +142,13 @@ export default function EditPurchase() {
                 <h2>Dashboard</h2>
                 <ul>
                     <Link to="/Dashboard"><li>Dashboard</li></Link>
-                    <Link to="/Vendor"><li>Add Vendor</li></Link>
+                    <Link to="/Vendor"><li>Vendor</li></Link>
                     <Link to="/Customer"><li>Customer</li></Link>
-                    <Link to="/Sale"><li>Sale</li></Link>
-                    <Link to="/Purchase"><li>Purchase</li></Link>
                     <Link to="/Product"><li>Product</li></Link>
-                    <Link to="/Invoice"><li>Invoice</li></Link>
                     <Link to="/UOM"><li>UOM</li></Link>
+                    <Link to="/Purchase"><li>Purchase</li></Link>
+                    <Link to="/Invoice"><li>Invoice</li></Link>
+                    <Link to="/Sale"><li>Sale</li></Link>
                     <Link to="/Attendance"><li>Attendance</li></Link>
                     <Link to="/Employee"><li>Employee</li></Link>
                     <Link to="/Salary"><li>Salary</li></Link>
@@ -174,37 +174,37 @@ export default function EditPurchase() {
                 </div>
                 <div className="Productbody" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
-<main class="main">
-    <h2>Purchase</h2>
-    <div class="formGroup">
-        <input className='input' value={PurchaseDate} type="date" name="date" id="date" placeholder="date" onChange={(e) => { SetPurchaseDate(e.target.value) }} />
-        <input className='input' value={VenderName} type="text" name="date" id="date" placeholder="date" disabled/>
-        <input className='input' value={VenderCode} type="text" name="date" id="date" placeholder="date" disabled/>
-    </div>
+                    <main class="main">
+                        <h2>Purchase</h2>
+                        <div class="formGroup">
+                            <input className='input' value={PurchaseDate} type="date" name="date" id="date" placeholder="date" onChange={(e) => { SetPurchaseDate(e.target.value) }} />
+                            <input className='input' value={VenderName} type="text" name="date" id="date" placeholder="date" disabled />
+                            <input className='input' value={VenderCode} type="text" name="date" id="date" placeholder="date" disabled />
+                        </div>
 
-    <div class="formGroup">
-        <input className='input' value={Payment} type="text" name="paymentTerms" id="paymentTerms" placeholder="Cash / Cheque / Account Transfer" onChange={(e) => { SetPayment(e.target.value) }} />
-    </div>
-    <div class="formGroup">
-        <span>
-            <label for="advancePayment">Advance Payment</label>
-            <select name="advancePayment" value={AdvancePaymentOrNot} class="advancePayment" id="advancePayment" onChange={(e) => { SetAdvancePaymentOrNot(e.target.value) }} >
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </span>
-        <input className='input' type="text" name="hmpyr" id="hmpyr" value={PurchasedMoney} placeholder="In How Much Money you Purchase" onChange={(e) => { SetPurchasedMoney(e.target.value) }} />
-    </div>
-    <div class="formGroup">
-        <input className='input' type="text" name="additionalNote" id="additionalNote" value={AdditionalNote} placeholder="Additional Info" onChange={(e) => { SetAdditionalNote(e.target.value) }} />
-    </div>
-    <div style={{ display: 'flex:', justifyContent: 'center', alignItems: 'center', width: '100% important' }}>
-        <button type='submit' id="submit" onClick={EditPurchase} style={{ backgroundColor: 'orange', width: '150px', color: 'white' }}> Edit Purchase </button>
-    </div>
-</main>
+                        <div class="formGroup">
+                            <input className='input' value={Payment} type="text" name="paymentTerms" id="paymentTerms" placeholder="Cash / Cheque / Account Transfer" onChange={(e) => { SetPayment(e.target.value) }} />
+                        </div>
+                        <div class="formGroup">
+                            <span>
+                                <label for="advancePayment">Advance Payment</label>
+                                <select name="advancePayment" value={AdvancePaymentOrNot} class="advancePayment" id="advancePayment" onChange={(e) => { SetAdvancePaymentOrNot(e.target.value) }} >
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </span>
+                            <input className='input' type="text" name="hmpyr" id="hmpyr" value={PurchasedMoney} placeholder="In How Much Money you Purchase" onChange={(e) => { SetPurchasedMoney(e.target.value) }} />
+                        </div>
+                        <div class="formGroup">
+                            <input className='input' type="text" name="additionalNote" id="additionalNote" value={AdditionalNote} placeholder="Additional Info" onChange={(e) => { SetAdditionalNote(e.target.value) }} />
+                        </div>
+                        <div style={{ display: 'flex:', justifyContent: 'center', alignItems: 'center', width: '100% important' }}>
+                            <button type='submit' id="submit" onClick={EditPurchase} style={{ backgroundColor: 'orange', width: '150px', color: 'white' }}> Edit Purchase </button>
+                        </div>
+                    </main>
 
 
-</div>
+                </div>
             </div>
         </main>
     );
