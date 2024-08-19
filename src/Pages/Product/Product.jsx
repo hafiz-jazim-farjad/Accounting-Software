@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
 function Product() {
 
 
-
     const [name, setName] = useState('')
 
     const [Name, SetName] = useState('')
@@ -27,7 +26,16 @@ function Product() {
             }
         });
     })
-
+    let logout = () => {
+        signOut(auth)
+            .then(() => {
+                // Sign-out successful.
+                window.location.href = "/Login";
+            })
+            .catch((error) => {
+                // An error happened.
+            });
+    };
     // for date 
     let forDayInWords = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursady', 'Friday', 'Saturday']
     let forMonthInWords = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octuber', 'November', 'December']
@@ -123,8 +131,6 @@ function Product() {
                 showCancelButton: false
             })
         }
-
-
     }
 
 
