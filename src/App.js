@@ -33,7 +33,7 @@ export default function App() {
       <Route path="/" element={<LoginComponent />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/SignUp" element={<Login />} />
-      {/* <Route path="/SignUp" element={<SignUp />} /> */}
+     
       <Route path="/Dashboard" element={<Dashboard />} />
 
       <Route path="/Vendor" element={<Vendor />} />
