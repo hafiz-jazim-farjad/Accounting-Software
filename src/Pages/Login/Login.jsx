@@ -38,15 +38,15 @@ export default function SignUp() {
                 }, 5000);
             })
             .catch((error) => {
-               console.log(error);
-               Swal.fire({
-                title: "Your Credentials are wrong",
-                text: "Wrong Credentials",
-                icon: "error",
-                showConfirmButton: false,
-                showCancelButton: false,
-                showCloseButton: false
-            });
+                console.log(error);
+                Swal.fire({
+                    title: "Your Credentials are wrong",
+                    text: "Wrong Credentials",
+                    icon: "error",
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    showCloseButton: false
+                });
             });
     }
 
@@ -74,7 +74,7 @@ export default function SignUp() {
     //         });
     //     }else{
     //         setTimeout(() => {
-                
+
     //             Swal.fire({
     //                 title: "Wrong Credentials",
     //                 text: "Wrong Credentials",
@@ -86,7 +86,7 @@ export default function SignUp() {
     //         }, 3000);
     //     }
     //     }
-        
+
     // })
 
     const ToSignup = () => {
@@ -94,14 +94,19 @@ export default function SignUp() {
     }
 
     return (
-        <main class="main" style={{ backgroundColor: 'rgb(255, 238, 207)', borderRadius: '50px', width: '450px' }}>
+        <main class="main" style={{ backgroundColor: 'rgb(255, 238, 207)', borderRadius: '50px', width: '600px' }}>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', rowGap: '10px' }}>
 
-                <h2 style={{ textAlign: 'center', color: '#FFB938' }}>Accounts Software
-                    <br /> <span style={{ color: 'black' }}>Login</span></h2>
+                <h2 style={{ textAlign: 'center', color: 'black' }}>Data Management Software </h2>
+                <h2 style={{ color: 'black' }}>Login</h2>
                 <input type="text" name="user" id="user" placeholder="username / email" autofocus class="LoginInputs" onChange={(e) => setEmail(e.target.value)} />
                 <input type="password" name="Password" id="Password" placeholder="Password" class="LoginInputs" onChange={(e) => setPassword(e.target.value)} />
-                <button type="submit" onClick={LoginUser} id="submit" style={{ backgroundColor: '#FFB938' }} > Login </button>
+                <button type="submit" onClick={LoginUser} id="submit"> Login </button>
+                <span style={{ textAlign: 'center', textDecoration: 'None', fontSize: '16pt', }}>
+                    Made By -
+                    <a href="https://techmancy.com" target='_blank' style={{ textAlign: 'center', color: 'blue', textDecoration: 'None', fontSize: '16pt', }}>TechMancy.com </a>
+                </span>
+
                 {/* <button  onClick={ToSignup} style={{backgroundColor:'transparent' , border:'none'}} > SignUp </button> */}
             </div>
         </main>
