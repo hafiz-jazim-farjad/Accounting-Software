@@ -26,8 +26,8 @@ export default function SignUp() {
                 const user = userCredential.user;
                 console.log(user);
                 Swal.fire({
-                    title: "Admin Login Successfully",
-                    text: "Admin Logined",
+                    title: `${email} Login Successfully`,
+                    text: `${email}  Logined`,
                     icon: "success",
                     showConfirmButton: false,
                     showCancelButton: false,
@@ -50,44 +50,47 @@ export default function SignUp() {
             });
     }
 
-    // document.addEventListener("keydown" , (e)=>{
-    //     if(e.code == "Enter" || e.code == "NumpadEnter"){
-    //         if(email.length > 0 && password.length > 0){
-    //         signInWithEmailAndPassword(auth, email, password)
-    //         .then((userCredential) => {
-    //             const user = userCredential.user;
-    //             console.log(user);
-    //             Swal.fire({
-    //                 title: "Admin Login Successfully",
-    //                 text: "Admin Logined",
-    //                 icon: "success",
-    //                 showConfirmButton: false,
-    //                 showCancelButton: false,
-    //                 showCloseButton: false
-    //             });
+    document.addEventListener("keydown", (e) => {
+        if (e.code == "Enter" || e.code == "NumpadEnter") {
+            if (email.length > 0 && password.length > 0) {
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        console.log(user);
+                        Swal.fire({
+                            title: `${email} Login Successfully`,
+                            text: `${email}  Logined`,
+                            icon: "success",
+                            showConfirmButton: false,
+                            showCancelButton: false,
+                            showCloseButton: false
+                        });
 
-    //             setTimeout(() => {
-    //                 window.location = "/Dashboard"
-    //             }, 5000);
-    //         })
-    //         .catch((error) => {
-    //         });
-    //     }else{
-    //         setTimeout(() => {
+                        setTimeout(() => {
+                            window.location = "/Dashboard"
+                        }, 5000);
+                    })
+                    .catch((error) => {
+                        console.log(error.code);
+                        console.log(error.message);
 
-    //             Swal.fire({
-    //                 title: "Wrong Credentials",
-    //                 text: "Wrong Credentials",
-    //                 icon: "error",
-    //                 showConfirmButton: false,
-    //                 showCancelButton: false,
-    //                 showCloseButton: false
-    //             });
-    //         }, 3000);
-    //     }
-    //     }
+                    });
+            } else {
+                setTimeout(() => {
 
-    // })
+                    Swal.fire({
+                        title: "Wrong Credentials",
+                        text: "Wrong Credentials",
+                        icon: "error",
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                        showCloseButton: false
+                    });
+                }, 3000);
+            }
+        }
+
+    })
 
     const ToSignup = () => {
         window.location = "/SignUp"
