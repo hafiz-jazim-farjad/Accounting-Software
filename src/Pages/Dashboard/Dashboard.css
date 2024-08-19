@@ -190,11 +190,12 @@ ul a:focus {
 
 /* Body */
 .DashboardrightSideBar .body {
-  flex: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 
 }
 
@@ -202,7 +203,7 @@ ul a:focus {
 .DashboardrightSideBar .body div {
   flex: 1;
   min-width:100px;
-  height: 200px;
+  height: 150px;
   background-color: #ffe4bb;
   box-shadow: 0px 0px 5px 1px orange;
     border: 4px solid none;

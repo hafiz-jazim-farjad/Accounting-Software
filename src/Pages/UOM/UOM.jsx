@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState , useEffect } from 'react'
 import { auth } from '../../Firebase/Firebase'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
@@ -80,17 +80,17 @@ function UOM() {
 
     return (
         <main className="DashboardMain">
-            <div className="DashboardleftSideBar">
+          <div className="DashboardleftSideBar">
                 <h2>Dashboard</h2>
                 <ul>
                     <Link to="/Dashboard"><li>Dashboard</li></Link>
-                    <Link to="/Vendor"><li>Vendor</li></Link>
+                    <Link to="/Vendor"><li>Add Vendor</li></Link>
                     <Link to="/Customer"><li>Customer</li></Link>
-                    <Link to="/Product"><li>Product</li></Link>
-                    <Link to="/UOM"><li>UOM</li></Link>
-                    <Link to="/Purchase"><li>Purchase</li></Link>
-                    <Link to="/Invoice"><li>Invoice</li></Link>
                     <Link to="/Sale"><li>Sale</li></Link>
+                    <Link to="/Purchase"><li>Purchase</li></Link>
+                    <Link to="/Product"><li>Product</li></Link>
+                    <Link to="/Invoice"><li>Invoice</li></Link>
+                    <Link to="/UOM"><li>UOM</li></Link>
                     <Link to="/Attendance"><li>Attendance</li></Link>
                     <Link to="/Employee"><li>Employee</li></Link>
                     <Link to="/Salary"><li>Salary</li></Link>
@@ -104,39 +104,39 @@ function UOM() {
                     </ul>
                 </div>
             </div>
-            <div className="DashboardrightSideBar">
-                <div className="header">
-                    <div className="headerLeftSection">
-                        <span id="one" style={{ fontSize: '15px' }}>{fullFinalDate} </span>
-                        <span id="two">Time: {fullTime}</span>
-                        <span id="three">Account</span>
-                    </div>
-                    <div className="headerRightSection">
-                        <span>{name}</span>
-                    </div>
+        <div className="DashboardrightSideBar">
+            <div className="header">
+                <div className="headerLeftSection">
+                    <span id="one" style={{fontSize:'15px'}}>{fullFinalDate} </span>
+                    <span id="two">Time: {fullTime}</span>
+                    <span id="three">Account</span>
                 </div>
-                <div className="Productbody" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-
-                    <main class="main">
-                        <h2>Unit Of Measurment</h2>
-                        <div class="formGroup">
-                            {/* code auto generate krna hy */}
-                            <input className='input' type="text" name="Code" id="Code" placeholder=" Code" autofocus />
-                            <input className='input' type="text" name="Name" id="Name" placeholder=" Name" />
-                        </div>
-
-                        <div class="formGroup">
-                            <input className='input' type="text" name="additionalNote" id="additionalNote" placeholder="Additional Info" />
-                        </div>
-                        <button type="submit" id="submit" onclick="addUOM()"> Save </button>
-                    </main>
-
-
+                <div className="headerRightSection">
+                    <span>{name}</span>
                 </div>
             </div>
+            <div className="Productbody" style={{display:'flex' , justifyContent:'center' , alignItems:'center'}}>
+               
+            <main class="main">
+            <h2>Unit Of Measurment</h2>
+            <div class="formGroup">
+                {/* code auto generate krna hy */}
+                <input className='input' type="text" name="Code" id="Code" placeholder=" Code" autofocus />
+                <input className='input' type="text" name="Name" id="Name" placeholder=" Name" />
+            </div>
+
+            <div class="formGroup">
+                <input className='input' type="text" name="additionalNote" id="additionalNote" placeholder="Additional Info" />
+            </div>
+            <button type="submit" id="submit" onclick="addUOM()"> Save </button>
         </main>
 
+               
+                           </div>
+        </div>
+    </main>
 
+      
     )
 }
 

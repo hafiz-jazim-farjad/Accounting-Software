@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState , useEffect } from 'react'
 import { auth } from '../../Firebase/Firebase'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
@@ -79,17 +79,17 @@ function Salary() {
     return (
 
         <main className="DashboardMain">
-            <div className="DashboardleftSideBar">
+         <div className="DashboardleftSideBar">
                 <h2>Dashboard</h2>
                 <ul>
                     <Link to="/Dashboard"><li>Dashboard</li></Link>
-                    <Link to="/Vendor"><li>Vendor</li></Link>
+                    <Link to="/Vendor"><li>Add Vendor</li></Link>
                     <Link to="/Customer"><li>Customer</li></Link>
-                    <Link to="/Product"><li>Product</li></Link>
-                    <Link to="/UOM"><li>UOM</li></Link>
-                    <Link to="/Purchase"><li>Purchase</li></Link>
-                    <Link to="/Invoice"><li>Invoice</li></Link>
                     <Link to="/Sale"><li>Sale</li></Link>
+                    <Link to="/Purchase"><li>Purchase</li></Link>
+                    <Link to="/Product"><li>Product</li></Link>
+                    <Link to="/Invoice"><li>Invoice</li></Link>
+                    <Link to="/UOM"><li>UOM</li></Link>
                     <Link to="/Attendance"><li>Attendance</li></Link>
                     <Link to="/Employee"><li>Employee</li></Link>
                     <Link to="/Salary"><li>Salary</li></Link>
@@ -103,29 +103,29 @@ function Salary() {
                     </ul>
                 </div>
             </div>
-            <div className="DashboardrightSideBar">
-                <div className="header">
-                    <div className="headerLeftSection">
-                        <span id="one" style={{ fontSize: '15px' }}>{fullFinalDate} </span>
-                        <span id="two">Time: {fullTime}</span>
-                        <span id="three">Account</span>
-                    </div>
-                    <div className="headerRightSection">
-                        <span>{name}</span>
-                    </div>
+        <div className="DashboardrightSideBar">
+            <div className="header">
+                <div className="headerLeftSection">
+                    <span id="one" style={{fontSize:'15px'}}>{fullFinalDate} </span>
+                    <span id="two">Time: {fullTime}</span>
+                    <span id="three">Account</span>
                 </div>
-                <div className="Productbody" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
-                        This is Salary page
-                    </div>
-
-
+                <div className="headerRightSection">
+                    <span>{name}</span>
                 </div>
             </div>
-        </main>
+            <div className="Productbody" style={{display:'flex' , justifyContent:'center' , alignItems:'center'}}>
+               
+            <div style={{display:'flex' , justifyContent:'center' , alignItems:'center' , height:'70vh'}}>
+            This is Salary page
+        </div>
 
+               
+                           </div>
+        </div>
+    </main>
 
+       
     )
 }
 

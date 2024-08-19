@@ -132,13 +132,13 @@ function Product() {
                 <h2>Dashboard</h2>
                 <ul>
                     <Link to="/Dashboard"><li>Dashboard</li></Link>
-                    <Link to="/Vendor"><li>Vendor</li></Link>
+                    <Link to="/Vendor"><li>Add Vendor</li></Link>
                     <Link to="/Customer"><li>Customer</li></Link>
-                    <Link to="/Product"><li>Product</li></Link>
-                    <Link to="/UOM"><li>UOM</li></Link>
-                    <Link to="/Purchase"><li>Purchase</li></Link>
-                    <Link to="/Invoice"><li>Invoice</li></Link>
                     <Link to="/Sale"><li>Sale</li></Link>
+                    <Link to="/Purchase"><li>Purchase</li></Link>
+                    <Link to="/Product"><li>Product</li></Link>
+                    <Link to="/Invoice"><li>Invoice</li></Link>
+                    <Link to="/UOM"><li>UOM</li></Link>
                     <Link to="/Attendance"><li>Attendance</li></Link>
                     <Link to="/Employee"><li>Employee</li></Link>
                     <Link to="/Salary"><li>Salary</li></Link>
@@ -175,6 +175,7 @@ function Product() {
                             {/* <label for="select"> Product Type</label> */}
                             <br />
                             <select name="" id="ImportOrLocal" onChange={(e) => SetImportOrLocal(e.target.value)}>
+                                <option value="Select" disabled selected> Select </option>
                                 <option value="Local"> Local </option>
                                 <option value="Import"> Import </option>
                             </select>
@@ -182,6 +183,7 @@ function Product() {
                             <label for="Nature"> Product Nature</label>
                             <br />
                             <select name="" id="ProductNature" onChange={(e) => SetProductNature(e.target.value)}>
+                                <option value="Select" disabled selected> Select Product Nature </option>
                                 <option value="Consumeable"> Consumeable </option>
                                 <option value="Assests"> Assests </option>
                                 <option value="Etc"> Etc... </option>
