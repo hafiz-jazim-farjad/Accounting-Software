@@ -71,7 +71,9 @@ export default function Dashboard() {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      setName(user.email);
+      var email = user.email
+      const username = email.substring(0, email.indexOf("@"));
+      setName(username);
     } else {
     }
     if (!user) {
@@ -220,10 +222,14 @@ export default function Dashboard() {
               {fullFinalDate}{" "}
             </span>
             <span id="two">Time: {fullTime}</span>
-            <span id="three">Account</span>
+            <span id="three">{name}</span>
           </div>
           <div className="headerRightSection">
-            <span>{name}</span>
+            <span>
+              <Link onClick={logout}>
+                <span style={{ backgroundColor: "red", color: "white", padding:'10px' , borderRadius: '10px'}}>Logout</span>
+              </Link>
+            </span>
           </div>
         </div>
 
@@ -237,22 +243,22 @@ export default function Dashboard() {
               flexDirection: "column",
               fontSize: '35px',
               fontFamily: 'cursive',
-              color:'black'
+              color: 'black'
             }}
-            >
-              <Link to="/SeeSales" style={{
+          >
+            <Link to="/SeeSales" style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
               fontSize: '35px',
               fontFamily: 'cursive',
-              color:'black',
-              textDecoration:'none'
+              color: 'black',
+              textDecoration: 'none'
 
             }}>
-            <b style={{ color: "orange", fontSize: "30px" }}> Total Sale</b>
-            {TotalSales ? TotalSales : 0}
+              <b style={{ color: "orange", fontSize: "30px" }}> Total Sale</b>
+              {TotalSales ? TotalSales : 0}
             </Link>
           </div>
 
@@ -265,7 +271,7 @@ export default function Dashboard() {
               flexDirection: "column",
               fontSize: '35px',
               fontFamily: 'cursive',
-              color:'black'
+              color: 'black'
 
             }}
           >
@@ -276,13 +282,13 @@ export default function Dashboard() {
               flexDirection: "column",
               fontSize: '35px',
               fontFamily: 'cursive',
-              color:'black',
-              textDecoration:'none'
+              color: 'black',
+              textDecoration: 'none'
 
             }}>
 
-            <b style={{ color: "orange", fontSize: "30px" }}> Total Purchase</b>{" "}
-            {TotalPurchase ? TotalPurchase : 0}
+              <b style={{ color: "orange", fontSize: "30px" }}> Total Purchase</b>{" "}
+              {TotalPurchase ? TotalPurchase : 0}
             </Link>
           </div>
           <div
@@ -294,7 +300,7 @@ export default function Dashboard() {
               flexDirection: "column",
               fontSize: '35px',
               fontFamily: 'cursive',
-              color:'black'
+              color: 'black'
 
             }}
           >
@@ -305,13 +311,13 @@ export default function Dashboard() {
               flexDirection: "column",
               fontSize: '35px',
               fontFamily: 'cursive',
-              color:'black',
-              textDecoration:'none'
+              color: 'black',
+              textDecoration: 'none'
 
             }}>
 
-            <b style={{ color: "orange", fontSize: "30px" }}> Customers</b>
-            {TotalCustomers ? TotalCustomers : 0}
+              <b style={{ color: "orange", fontSize: "30px" }}> Customers</b>
+              {TotalCustomers ? TotalCustomers : 0}
             </Link>
           </div>
         </div>
@@ -328,24 +334,24 @@ export default function Dashboard() {
               flexDirection: "column",
               fontSize: '35px',
               fontFamily: 'cursive',
-              color:'black'
+              color: 'black'
 
 
             }}
           >
-             <Link to="/SeeVenders" style={{
+            <Link to="/SeeVenders" style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
               fontSize: '35px',
               fontFamily: 'cursive',
-              color:'black',
-              textDecoration:'none'
+              color: 'black',
+              textDecoration: 'none'
 
             }}>
 
-            <b style={{ color: "orange", fontSize: "30px" }}> Total Venders</b> {TotalVenders ? TotalVenders : 0}
+              <b style={{ color: "orange", fontSize: "30px" }}> Total Venders</b> {TotalVenders ? TotalVenders : 0}
             </Link>
           </div>
           <div
@@ -357,25 +363,25 @@ export default function Dashboard() {
               flexDirection: "column",
               fontSize: '35px',
               fontFamily: 'cursive',
-              color:'black'
+              color: 'black'
 
 
             }}
           >
-             <Link to="/SeeProducts" style={{
+            <Link to="/SeeProducts" style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
               fontSize: '35px',
               fontFamily: 'cursive',
-              color:'black',
-              textDecoration:'none'
+              color: 'black',
+              textDecoration: 'none'
 
             }}>
 
-            <b style={{ color: "orange", fontSize: "30px" }}> Total Products</b>{" "}
-            {TotalProducts ? TotalProducts : 0}
+              <b style={{ color: "orange", fontSize: "30px" }}> Total Products</b>{" "}
+              {TotalProducts ? TotalProducts : 0}
             </Link>
           </div>
           <div
@@ -386,7 +392,7 @@ export default function Dashboard() {
               alignItems: "center",
               flexDirection: "column",
               fontSize: '15px',
-              color:'black'
+              color: 'black'
             }}
           >
             <b style={{ color: "orange", fontSize: "30px" }}>Total Employees</b>

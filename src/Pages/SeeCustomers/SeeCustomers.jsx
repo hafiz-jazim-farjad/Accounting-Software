@@ -23,7 +23,9 @@ export default function SeeCustomers() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setName(user.email);
+        var email = user.email
+        const username = email.substring(0, email.indexOf("@"));
+        setName(username);
       } else {
       }
       if (!user) {
@@ -287,10 +289,14 @@ export default function SeeCustomers() {
               {fullFinalDate}{" "}
             </span>
             <span id="two">Time: {fullTime}</span>
-            <span id="three">Account</span>
+            <span id="three">{name}</span>
           </div>
           <div className="headerRightSection">
-            <span>{name}</span>
+            <span>
+              <Link onClick={logout}>
+                <span style={{ backgroundColor: "red", color: "white", padding: '10px', borderRadius: '10px' }}>Logout</span>
+              </Link>
+            </span>
           </div>
         </div>
         <div className="Productbody">
