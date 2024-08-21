@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
 function Product() {
 
 
-
     const [name, setName] = useState('')
 
     const [Name, SetName] = useState('')
@@ -20,12 +19,23 @@ function Product() {
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                setName(user.email)
+                var email = user.email
+                const username = email.substring(0, email.indexOf("@"));
+                setName(username);
             } else {
             }
         });
     })
-
+    let logout = () => {
+        signOut(auth)
+            .then(() => {
+                // Sign-out successful.
+                window.location.href = "/Login";
+            })
+            .catch((error) => {
+                // An error happened.
+            });
+    };
     // for date 
     let forDayInWords = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursady', 'Friday', 'Saturday']
     let forMonthInWords = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octuber', 'November', 'December']
@@ -121,8 +131,6 @@ function Product() {
                 showCancelButton: false
             })
         }
-
-
     }
 
 
@@ -155,10 +163,14 @@ function Product() {
                     <div className="headerLeftSection">
                         <span id="one" style={{ fontSize: '15px' }}>{fullFinalDate} </span>
                         <span id="two">Time: {fullTime}</span>
-                        <span id="three">Account</span>
+                        <span id="three">{name}</span>
                     </div>
                     <div className="headerRightSection">
-                        <span>{name}</span>
+                        <span>
+                            <Link onClick={logout}>
+                                <span style={{ backgroundColor: "red", color: "white", padding: '10px', borderRadius: '10px' }}>Logout</span>
+                            </Link>
+                        </span>
                     </div>
                 </div>
                 <div className="Productbody" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

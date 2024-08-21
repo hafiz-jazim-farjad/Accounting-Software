@@ -26,7 +26,9 @@ function Purchase() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setName(user.email);
+        var email = user.email
+        const username = email.substring(0, email.indexOf("@"));
+        setName(username);
       } else {
         window.location = "/Login";
       }
@@ -116,26 +118,26 @@ function Purchase() {
           PurchasedMoney,
           Quantity,
         });
-          const docRef2 = await addDoc(collection(db, "Products"), {
-              ProductRandomCode,
-              "Name" : VenderProduct,
-              ImportOrLocal,
-              ProductNature,
-              "AdditionalInfo": VenderProduct + "Product",
-          });
+        const docRef2 = await addDoc(collection(db, "Products"), {
+          ProductRandomCode,
+          "Name": VenderProduct,
+          ImportOrLocal,
+          ProductNature,
+          "AdditionalInfo": VenderProduct + "Product",
+        });
 
-          Swal.fire({
-              title: 'Product Added Successfully',
-              text: 'Product Added',
-              icon: 'success',
-              showConfirmButton: false,
-              showCancelButton: false
-          })
-          // document.getElementById("Name").value = '';
-          // document.getElementById("ImportOrLocal").value = '';
-          // document.getElementById("ProductNature").value = '';
-          // document.getElementById("AdditionalInfo").value = '';
-         
+        Swal.fire({
+          title: 'Product Added Successfully',
+          text: 'Product Added',
+          icon: 'success',
+          showConfirmButton: false,
+          showCancelButton: false
+        })
+        // document.getElementById("Name").value = '';
+        // document.getElementById("ImportOrLocal").value = '';
+        // document.getElementById("ProductNature").value = '';
+        // document.getElementById("AdditionalInfo").value = '';
+
         console.log("Document written with ID: ", docRef.id);
         console.log("Document written with ID: ", docRef2.id);
         Swal.fire({
@@ -302,10 +304,14 @@ function Purchase() {
               {fullFinalDate}
             </span>
             <span id="two">Time:{fullTime}</span>
-            <span id="three">Account</span>
+            <span id="three">{name}</span>
           </div>
           <div className="headerRightSection">
-            <span>{name}</span>
+            <span>
+              <Link onClick={logout}>
+                <span style={{ backgroundColor: "red", color: "white", padding: '10px', borderRadius: '10px' }}>Logout</span>
+              </Link>
+            </span>
           </div>
         </div>
         <div
@@ -419,21 +425,21 @@ function Purchase() {
               />
             </div>
             <div className="formGroup">◘
-                  <select name="" id="ImportOrLocal" onChange={(e) => SetImportOrLocal(e.target.value)}>
-                                <option value="Select" disabled selected> Select </option>
-                                <option value="Local"> Local </option>
-                                <option value="Import"> Import </option>
-                            </select>
+              <select name="" id="ImportOrLocal" onChange={(e) => SetImportOrLocal(e.target.value)}>
+                <option value="Select" disabled selected> Select </option>
+                <option value="Local"> Local </option>
+                <option value="Import"> Import </option>
+              </select>
 
-                            <label for="Nature"> Product Nature</label>
-                            <br />
-                            <select name="" id="ProductNature" onChange={(e) => SetProductNature(e.target.value)}>
-                                <option value="Select" disabled selected> Select Product Nature </option>
-                                <option value="Consumeable"> Consumeable </option>
-                                <option value="Assests"> Assests </option>
-                                <option value="Etc"> Etc... </option>
-                            </select>
-              </div>
+              <label for="Nature"> Product Nature</label>
+              <br />
+              <select name="" id="ProductNature" onChange={(e) => SetProductNature(e.target.value)}>
+                <option value="Select" disabled selected> Select Product Nature </option>
+                <option value="Consumeable"> Consumeable </option>
+                <option value="Assests"> Assests </option>
+                <option value="Etc"> Etc... </option>
+              </select>
+            </div>
             <div className="formGroup">
               <input
                 className="input"

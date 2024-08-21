@@ -3,7 +3,7 @@ import "../../App.css";
 import { Link } from "react-router-dom";
 import { auth } from "../../Firebase/Firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, getDoc, updateDoc , query , collection , getDocs } from "firebase/firestore";
+import { doc, getDoc, updateDoc, query, collection, getDocs } from "firebase/firestore";
 import { db } from "../../Firebase/Firebase";
 import Swal from "sweetalert2";
 
@@ -36,7 +36,9 @@ export default function EditSales() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setName(user.email);
+        var email = user.email
+        const username = email.substring(0, email.indexOf("@"));
+        setName(username);
       } else {
         window.location = "/Login";
       }
@@ -245,10 +247,15 @@ export default function EditSales() {
               {fullFinalDate}
             </span>
             <span id="two">Time: {fullTime}</span>
-            <span id="three">Account</span>
+            <span id="three">{name}</span>
           </div>
           <div className="headerRightSection">
-            <span>{name}</span>
+            <span>
+              <Link onClick={logout}>
+                <span style={{ backgroundColor: "red", color: "white", padding: '10px', borderRadius: '10px' }}>Logout</span>
+              </Link>
+            </span>
+
           </div>
         </div>
         <div
@@ -301,7 +308,7 @@ export default function EditSales() {
                 onChange={(e) => SetProductName(e.target.value)}
                 disabled
               />
-               <select
+              <select
                 className="input"
                 type="text"
                 name="ProductName"

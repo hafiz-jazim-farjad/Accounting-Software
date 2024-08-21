@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState , useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { auth } from '../../Firebase/Firebase'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
@@ -10,7 +10,9 @@ function Attendance() {
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            setName(user.email)
+            var email = user.email
+            const username = email.substring(0, email.indexOf("@"));
+            setName(username);
         } else {
         }
 
@@ -79,7 +81,7 @@ function Attendance() {
     return (
 
         <main className="DashboardMain">
-         <div className="DashboardleftSideBar">
+            <div className="DashboardleftSideBar">
                 <h2>Dashboard</h2>
                 <ul>
                     <Link to="/Dashboard"><li>Dashboard</li></Link>
@@ -103,29 +105,33 @@ function Attendance() {
                     </ul>
                 </div>
             </div>
-        <div className="DashboardrightSideBar">
-            <div className="header">
-                <div className="headerLeftSection">
-                    <span id="one" style={{fontSize:'15px'}}>{fullFinalDate} </span>
-                    <span id="two">Time: {fullTime}</span>
-                    <span id="three">Account</span>
+            <div className="DashboardrightSideBar">
+                <div className="header">
+                    <div className="headerLeftSection">
+                        <span id="one" style={{ fontSize: '15px' }}>{fullFinalDate} </span>
+                        <span id="two">Time: {fullTime}</span>
+                        <span id="three">{name}</span>
+                    </div>
+                    <div className="headerRightSection">
+                        <span>
+                            <Link onClick={logout}>
+                                <span style={{ backgroundColor: "red", color: "white", padding: '10px', borderRadius: '10px' }}>Logout</span>
+                            </Link>
+                        </span>
+                    </div>
                 </div>
-                <div className="headerRightSection">
-                    <span>{name}</span>
+                <div className="Productbody" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+                        This is Attendace page
+                    </div>
+
+
                 </div>
             </div>
-            <div className="Productbody" style={{display:'flex' , justifyContent:'center' , alignItems:'center'}}>
-               
-            <div style={{display:'flex' , justifyContent:'center' , alignItems:'center' , height:'70vh'}}>
-            This is Attendace page
-        </div>
+        </main>
 
-               
-                           </div>
-        </div>
-    </main>
 
-       
     )
 }
 

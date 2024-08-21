@@ -4,7 +4,6 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 
-
 // Jaizm database credintials hello
 
 const firebaseConfig = {

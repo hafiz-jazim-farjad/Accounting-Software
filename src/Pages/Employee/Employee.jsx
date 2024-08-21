@@ -1,8 +1,8 @@
-import React from "react";
 import "../../App.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { auth } from "../../Firebase/Firebase";
+import React from 'react'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../Firebase/Firebase";
@@ -27,15 +27,17 @@ export default function Employee() {
  
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setName(user.email);
-            } else {
-            }
-            if (!user) {
-                window.location = "/Login";
-            }
-        });
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            var email = user.email
+            const username = email.substring(0, email.indexOf("@"));
+            setName(username);
+        } else {
+        }
+        if (!user) {
+            window.location = "/Login"
+        }
+    });
     });
 
     async function AddEmployee() {
@@ -375,5 +377,7 @@ export default function Employee() {
                 </div>
             </div>
         </main>
-    );
+                      
+
+    )
 }
