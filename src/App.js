@@ -23,6 +23,8 @@ import SeeProducts from './Pages/SeeProducts/SeeProducts';
 import EditProduct from './Pages/EditProduct/EditProduct';
 import SeePurchases from './Pages/SeePurchases/SeePurchases';
 import EditPurchase from './Pages/EditPurchase/EditPurchase';
+import SeeEmployees from './Pages/SeeEmployees/SeeEmployees';
+import EditEmployees from './Pages/EditEmployees/EditEmployees';
 export function LoginComponent() {
   return window.location = "/Login"
 }
@@ -53,13 +55,17 @@ export default function App() {
 
       <Route path="/Product" element={<Product />} />
       <Route path="/SeeProducts" element={<SeeProducts />} />
-      <Route path="//EditProduct/id/:id" element={<EditProduct />} />
+      <Route path="/EditProduct/id/:id" element={<EditProduct />} />
 
       <Route path="/Invoice" element={<Invoice />} />
 
+      <Route path="/Employee" element={<Employee />} />
+      <Route path="/SeeEmployees" element={<SeeEmployees />} />
+      <Route path="/EditEmployees/id/:id" element={<EditEmployees />} />
+
+
       <Route path="/UOM" element={<UOM />} />
       <Route path="/Attendance" element={<Attendance />} />
-      <Route path="/Employee" element={<Employee />} />
       <Route path="/Salary" element={<Salary />} />
 
     </Routes>

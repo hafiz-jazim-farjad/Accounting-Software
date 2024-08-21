@@ -398,3 +398,6 @@ export default function Vendor() {
     </main>
   );
 }
+
+// Hasaan has created the backend and set some ui 
+// Jazim has create the ui
