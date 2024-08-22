@@ -322,7 +322,7 @@ export default function Employee() {
                             />
                             {/* stn or ntn me sy koi b ek dal dy ya dono dal dy agar ho tw */}
                             <select name="Genders"className="input" id="ImportOrLocal" onChange={(e) => SetEmployeeGender(e.target.value)}>
-                                <option value="Select" disabled selected> Select </option>
+                                <option value="Select" disabled selected> Gender </option>
                                 <option value="male"> male </option>
                                 <option value="female"> female </option>
                             </select>
@@ -331,7 +331,7 @@ export default function Employee() {
                         
                         <div class="formGroup">
                             <select name="Genders"className="input" id="ImportOrLocal" onChange={(e) => SetEmployeePosition(e.target.value)}>
-                                <option value="Select" disabled selected> Select </option>
+                                <option value="Select" disabled selected> Designation </option>
                                 <option value="Manager"> Manager </option>
                                 <option value="Supervisor"> Supervisor </option>
                                 <option value="Normal Employee"> Normal Employee </option>

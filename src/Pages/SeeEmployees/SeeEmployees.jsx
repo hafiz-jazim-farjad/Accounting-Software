@@ -16,6 +16,15 @@ import {
 import { db } from "../../Firebase/Firebase";
 import Swal from "sweetalert2";
 import "bootstrap/dist/css/bootstrap.min.css";
+// import icons from Fontawesome 
+import '@fortawesome/fontawesome-free/css/all.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+// import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
+
+
 export default function SeeEmployees() {
     const [name, setName] = useState("");
 
@@ -296,6 +305,11 @@ export default function SeeEmployees() {
 
                     <table style={{ width: "100%", cursor: "alias" }}>
                         <thead>
+                            <tr>
+                                {/* <th colSpan={2}><span> <Link to={'/Dashboard'}> <FontAwesomeIcon icon={faCoffee} /> Back </Link> </span></th> */}
+                                <th colSpan={2}><span> <Link to={'/Dashboard'}> <FontAwesomeIcon icon={faCircleArrowLeft} /> Back </Link> </span></th>
+                                <th colSpan={4}> Emplyee Detail </th>
+                            </tr>
                             <tr
                                 className="table-headers"
                                 style={{ fontSize: "12px", overflow: "scroll" }}
@@ -305,7 +319,7 @@ export default function SeeEmployees() {
                                 <th>Contact1</th>
                                 <th>CNIC</th>
                                 <th>Adress</th>
-                                <th>Product Purchased</th>
+                                <th>Employee Designation</th>
                             </tr>
                         </thead>
                         {/* <tbody style={{ overflow: 'scroll', height: '100px !important' }} id='TableBody' > */}
