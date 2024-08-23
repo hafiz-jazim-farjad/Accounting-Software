@@ -19,7 +19,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import icons from Fontawesome 
 import '@fortawesome/fontawesome-free/css/all.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 // import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,11 +31,13 @@ export default function SeeEmployees() {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                setName(user.email);
+                var email = user.email
+                const username = email.substring(0, email.indexOf("@"));
+                setName(username);
             } else {
             }
             if (!user) {
-                window.location = "/Login";
+                window.location = "/Login"
             }
         });
     });
@@ -293,11 +294,14 @@ export default function SeeEmployees() {
                             {fullFinalDate}{" "}
                         </span>
                         <span id="two">Time: {fullTime}</span>
-                        <span id="three">Account</span>
+                        <span id="three">{name}</span>
                     </div>
                     <div className="headerRightSection">
-                        <span>{name}</span>
-                    </div>
+                        <span>
+                            <Link onClick={logout}>
+                                <span style={{ backgroundColor: "red", color: "white", padding: '10px', borderRadius: '10px' }}>Logout</span>
+                            </Link>
+                        </span>                    </div>
                 </div>
                 <div className="Productbody">
                     {/* <div className="Productbody" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow:'hidden ' }}> */}

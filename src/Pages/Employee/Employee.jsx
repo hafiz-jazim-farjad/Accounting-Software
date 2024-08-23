@@ -24,20 +24,20 @@ export default function Employee() {
     const [Adress, SetAdress] = useState("");
 
     const EmployeeId = Math.floor(Math.random() * 100000);
- 
+
 
     useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            var email = user.email
-            const username = email.substring(0, email.indexOf("@"));
-            setName(username);
-        } else {
-        }
-        if (!user) {
-            window.location = "/Login"
-        }
-    });
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                var email = user.email
+                const username = email.substring(0, email.indexOf("@"));
+                setName(username);
+            } else {
+            }
+            if (!user) {
+                window.location = "/Login"
+            }
+        });
     });
 
     async function AddEmployee() {
@@ -238,10 +238,14 @@ export default function Employee() {
                             {fullFinalDate}{" "}
                         </span>
                         <span id="two">Time: {fullTime}</span>
-                        <span id="three">Account</span>
+                        <span id="three">{name}</span>
                     </div>
                     <div className="headerRightSection">
-                        <span>{name}</span>
+                        <span>
+                            <Link onClick={logout}>
+                                <span style={{ backgroundColor: "red", color: "white", padding: '10px', borderRadius: '10px' }}>Logout</span>
+                            </Link>
+                        </span>
                     </div>
                 </div>
                 <div
@@ -321,16 +325,16 @@ export default function Employee() {
                                 onChange={(e) => SetDateOfBirth(e.target.value)}
                             />
                             {/* stn or ntn me sy koi b ek dal dy ya dono dal dy agar ho tw */}
-                            <select name="Genders"className="input" id="ImportOrLocal" onChange={(e) => SetEmployeeGender(e.target.value)}>
+                            <select name="Genders" className="input" id="ImportOrLocal" onChange={(e) => SetEmployeeGender(e.target.value)}>
                                 <option value="Select" disabled selected> Gender </option>
                                 <option value="male"> male </option>
                                 <option value="female"> female </option>
                             </select>
 
                         </div>
-                        
+
                         <div class="formGroup">
-                            <select name="Genders"className="input" id="ImportOrLocal" onChange={(e) => SetEmployeePosition(e.target.value)}>
+                            <select name="Genders" className="input" id="ImportOrLocal" onChange={(e) => SetEmployeePosition(e.target.value)}>
                                 <option value="Select" disabled selected> Designation </option>
                                 <option value="Manager"> Manager </option>
                                 <option value="Supervisor"> Supervisor </option>
@@ -377,7 +381,7 @@ export default function Employee() {
                 </div>
             </div>
         </main>
-                      
+
 
     )
 }
