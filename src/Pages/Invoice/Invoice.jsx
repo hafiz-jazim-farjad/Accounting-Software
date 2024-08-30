@@ -12,7 +12,7 @@ import { db } from "../../Firebase/Firebase";
 
 const Invoice = () => {
   const [SpecificSalesData, SetSpecificSalesData] = useState();
-
+  const [count, Setcount] = useState(2)
   const [Name, SetName] = useState("");
   const [date, SetDate] = useState("");
   const [email, Setemail] = useState("");
@@ -22,6 +22,11 @@ const Invoice = () => {
   const [Quantity, SetQuantity] = useState("");
   const [Price, SetPrice] = useState("");
   const [AdditionalInfo, SetAdditionalInfo] = useState("");
+
+
+
+
+
   const [invoiceDetails, setInvoiceDetails] = useState({
     companyLogo: Logo,
     companyName: "TechMancy Co.",
@@ -266,6 +271,11 @@ const Invoice = () => {
     } = vender;
 
     // Update the state with the selected vendor's details
+
+  
+ 
+               // </tr>
+
     SetSpecificSalesData([
       Name,
       DeliveryDate,
@@ -280,35 +290,146 @@ const Invoice = () => {
   };
 
   // Assuming you're using React, this logs the updated SpecificSalesData whenever it changes
+
+  
   useEffect(() => {
     if (SpecificSalesData && SpecificSalesData.length > 0) {
-      const Name = SpecificSalesData[0];
-      const Date = SpecificSalesData[1];
-      const email = SpecificSalesData[2];
-      const Number = SpecificSalesData[3];
-      const PaymentMethod = SpecificSalesData[4];
-      const Product = SpecificSalesData[5];
-      const Quantity = SpecificSalesData[6];
-      const Price = SpecificSalesData[7];
-      const AdditionalInfo = SpecificSalesData[8];
-
-      SetName(Name);
-      SetDate(Date);
-      Setemail(email);
-      SetNumber(Number);
-      SetPaymentMethod(PaymentMethod);
-      SetProduct(Product);
-      SetQuantity(Quantity);
-      SetPrice(Price);
-      SetAdditionalInfo(AdditionalInfo);
+        const Name = SpecificSalesData[0];
+        const Date = SpecificSalesData[1];
+        const email = SpecificSalesData[2];
+        const Number = SpecificSalesData[3];
+        const PaymentMethod = SpecificSalesData[4];
+        const Product = SpecificSalesData[5];
+        const Quantity = SpecificSalesData[6];
+        const Price = SpecificSalesData[7];
+        const AdditionalInfo = SpecificSalesData[8];
+        
+        // Calculate the total
+        const calulateTotal = Quantity * Price;
+        
+        // Set innerHTML with a script for removeItem function
+        document.getElementById("additems").innerHTML = `
+            <tr id="row-${count}">
+                <td>${count - 2}</td>
+                <td>
+                    <input type="text" class="form-control" value="${Product}" disabled/>
+                </td>
+                <td>
+                    <input type="number" class="form-control" value="${Quantity}" id="quantity" disabled/>
+                </td>
+                <td>
+                    <input type="number" class="form-control" value="${Price}" id="price" disabled/>
+                </td>
+                <td>${calulateTotal}</td>
+                <td class="hide-on-capture">  
+                    <button
+                        class="btn btn-danger"
+                        onclick="document.getElementById('row-${count}').remove()"
+                    >
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        `;
+        
+        // Optional state updates (if needed)
+        SetName(Name);
+        SetDate(Date);
+        Setemail(email);
+        SetNumber(Number);
+        SetPaymentMethod(PaymentMethod);
+        SetProduct(Product);
+        SetQuantity(Quantity);
+        SetPrice(Price);
+        SetAdditionalInfo(AdditionalInfo);
     }
-  }, [SpecificSalesData]); // Runs whenever SpecificSalesData is updated
+}, [SpecificSalesData]);
+// Runs whenever SpecificSalesData is updated
   //   console.log("====================================");
   //   console.log(SalesAllData);
   //   console.log("====================================");
-  var count = 0;
 
   var TotalPrice = Price * Quantity;
+
+
+
+  //   function addItem(){  
+  //     Setcount(count + 1)
+  //       document.getElementById('additems').innerHTML += 
+  // `
+  //  <tr>
+  //                           <td>${count}</td>
+  //                           <td>
+  //                             <input
+  //                               type="text"
+  //                               className="form-control"
+  //                             />
+  //                           </td>
+  //                           <td>
+  //                             <input
+  //                               type="number"
+  //                               className="form-control"
+  //                               onChange={(e) => SetQuantity(e.target.value)}
+
+  //                             />
+  //                           </td>
+  //                           <td>
+  //                             <input
+  //                               type="number"
+  //                               className="form-control"
+  //                               {(e) => SetPrice(e.target.value)}
+  //                             />
+  //                           </td>
+  //                           <td>${TotalPrice}</td>
+  //                           </tr>
+  //                           `
+  //                         }
+
+  {/* <td className="hide-on-capture">
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => removeItem()}
+                          >
+                            Remove
+                          </button>
+                        </td> */}
+
+  const [items, setItems] = useState([]);
+  const [count2, setCount2] = useState(1);
+const specificid = Math.round(Math.random()*100000)
+console.log(specificid);
+
+  const addItem = () => {
+    setItems([
+      ...items,
+      {
+        id: count2,
+        quantity: 0,
+        price: 0,
+        RowId:specificid
+      }
+    ]);
+    setCount2(count2 + 1);
+  };
+
+  const handleQuantityChange = (id, value) => {
+    setItems(items.map(item =>
+      item.id === id ? { ...item, quantity: parseFloat(value) } : item
+    ));
+  };
+
+  const handlePriceChange = (id, value) => {
+    setItems(items.map(item =>
+      item.id === id ? { ...item, price: parseFloat(value) } : item
+    ));
+  };
+
+  const totalPrice = items.reduce((total, item) => total + item.quantity * item.price, 0);
+
+  const handleRemove = (id) => {
+    setItems(items.filter(item => item.RowId !== id));
+  };
+
 
   return (
     <main className="DashboardMain">
@@ -509,59 +630,59 @@ const Invoice = () => {
                           <th>Quantity</th>
                           <th>Price</th>
                           <th>Total</th>
+                          <th>Remove</th>
                           {/* <th className="hide-on-capture">Actions</th>{" "} */}
                           {/* Hide this column during capture */}
                         </tr>
                       </thead>
                       <tbody id="additems">
                         {/* {invoiceDetails.items.map((item, index) => ( */}
-                        <tr>
-                          <td>{count + 1}</td>
-                          <td>
-                            <input
-                              type="text"
-                              className="form-control"
-                              value={Product}
-                            />
-                          </td>
-                          <td>
-                            <input
-                              type="number"
-                              className="form-control"
-                              value={Quantity}
-                              onChange={(e) => SetQuantity(e.target.value)}
-                            />
-                          </td>
-                          <td>
-                            <input
-                              type="number"
-                              className="form-control"
-                              value={Price}
-                              onChange={(e) => SetPrice(e.target.value)}
-                            />
-                          </td>
-                          <td>${TotalPrice}</td>
-                          {/* <td className="hide-on-capture">
-                            <button
-                              className="btn btn-danger"
-                              onClick={() => removeItem()}
-                            >
-                              Remove
-                            </button>
-                          </td> */}
-                        </tr>
+
                         {/* ))} */}
+                        {items.map((item , index) => (
+                          <tr key={item.id}>
+                            <td>{item.id}</td>
+                            <td>
+                              <input type="text" className="form-control" />
+                            </td>
+                            <td>
+                              <input
+                                type="number"
+                                className="form-control"
+                                value={item.quantity}
+                                onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="number"
+                                className="form-control"
+                                value={item.price}
+                                onChange={(e) => handlePriceChange(item.id, e.target.value)}
+                              />
+                            </td>
+                            <td>{totalPrice}</td>
+                            <td>
+              <button
+                className="btn btn-danger"
+                onClick={() => handleRemove(item.RowId)}
+              >
+                Remove
+              </button>
+            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
-                  {/* <div className="text-center mt-3 hide-on-capture">
+                  <div className="text-center mt-3 hide-on-capture">
                     <button
                       className="btn btn-light text-dark"
                       onClick={addItem}
                     >
                       Add Item
                     </button>
-                  </div> */}
+                  </div>
                   <div className="d-flex justify-content-end mt-4">
                     <h3>Subtotal: ${TotalPrice}</h3>
                   </div>
