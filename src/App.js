@@ -25,6 +25,7 @@ import SeePurchases from './Pages/SeePurchases/SeePurchases';
 import EditPurchase from './Pages/EditPurchase/EditPurchase';
 import SeeEmployees from './Pages/SeeEmployees/SeeEmployees';
 import EditEmployees from './Pages/EditEmployees/EditEmployees';
+import SeeAttendance from './Pages/SeeAttendance/SeeAttandence';
 export function LoginComponent() {
   return window.location = "/Login"
 }
@@ -67,6 +68,7 @@ export default function App() {
 
       <Route path="/UOM" element={<UOM />} />
       <Route path="/Attendance" element={<Attendance />} />
+      <Route path="/SeeAttandance" element={<SeeAttendance />} />
       <Route path="/Salary" element={<Salary />} />
 
     </Routes>
