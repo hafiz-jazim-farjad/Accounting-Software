@@ -22,6 +22,7 @@ export default function Employee() {
     const [EmployeeGender, SetEmployeeGender] = useState("");
     const [EmployeePosition, SetEmployeePosition] = useState("");
     const [Adress, SetAdress] = useState("");
+    const [Salary, SetSalary] = useState("");
 
     const EmployeeId = Math.floor(Math.random() * 100000);
 
@@ -51,7 +52,8 @@ export default function Employee() {
             EmployeeGender &&
             EmployeePosition &&
             Adress &&
-            EmployeeGender
+            EmployeeGender &&
+            Salary
         ) {
             try {
                 const docRef = await addDoc(collection(db, "Employees"), {
@@ -65,7 +67,7 @@ export default function Employee() {
                     EmployeeGender: EmployeeGender,
                     EmployeePosition: EmployeePosition,
                     Adress: Adress,
-                    Salary: "0",
+                    Salary: Salary,
                 });
 
                 console.log("Document written with ID: ", docRef.id);
@@ -340,6 +342,14 @@ export default function Employee() {
                                 <option value="Supervisor"> Supervisor </option>
                                 <option value="Normal Employee"> Normal Employee </option>
                             </select>
+                            <input
+                                className="input"
+                                type="text"
+                                name="Salary"
+                                id="Date"
+                                placeholder="Salary"
+                                onChange={(e) => SetSalary(e.target.value)}
+                            />
                         </div>
                         <div
                             style={{

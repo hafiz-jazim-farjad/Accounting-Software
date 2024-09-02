@@ -240,12 +240,14 @@ export default function Attendance() {
                                 <option value="Leave">Leave</option>
                             </select>
                         </div>
+                        
                         <div
                             style={{
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
                                 width: "100%",
+                                columnGap:'10px'
                             }}
                         >
                             <button
