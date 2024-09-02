@@ -24,8 +24,9 @@ import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 
-export default function SeeSalary() {
+export default function PreviousSalary() {
     const [name, setName] = useState("");
+    const [DateInput, SetDateInput] = useState("");
 
 
     useEffect(() => {
@@ -119,28 +120,28 @@ export default function SeeSalary() {
             });
     };
 
-    async function GetSalary() {
+    async function GetSallary() {
         const q = query(collection(db, "Salary"));
         const querySnapshot = await getDocs(q);
 
         let rows = "";
         querySnapshot.forEach((doc) => {
-            const Employees = doc.data();
+            const Salary = doc.data();
             const rowId = doc.id;
-            const date = new Date();
-            const Finaldatetomatch = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-if(Finaldatetomatch == Employees.todayDate){
+if(DateInput == Salary.todayDate){
 
+    
     rows += `
     <tr data-id="${rowId}">
-    <td>${Employees.employeeName}</td>  
-    <td className="mobile-header">${Employees.employeeGender}</td>
-    <td className="mobile-header">${Employees.salary}</td>
-    <td className="mobile-header">${Employees.todayDate}</td>
-    <td className="mobile-header">${Employees.Paid}</td>
+    <td>${Salary.employeeName}</td>  
+    <td className="mobile-header">${Salary.employeeGender}</td>
+    <td className="mobile-header">${Salary.employeeposition}</td>
+    <td className="mobile-header">${Salary.salary}</td>
+    <td className="mobile-header">${Salary.todayDate}</td>
     </tr>
     `;
-}
+    }
+
 });
 
         // Insert rows into the table body
@@ -176,7 +177,6 @@ if(Finaldatetomatch == Employees.todayDate){
                             <h5 style="margin-right: 20px;"><strong>Employee Position:</strong> ${Employee.employeeposition}</h5>
                             <h5 style="margin-right: 20px;"><strong>Salary:</strong> ${Employee.salary}</h5>
                             <h5 style="margin-right: 20px;"><strong>Salary Date:</strong> ${Employee.todayDate}</h5>
-                            <h5 style="margin-right: 20px;"><strong>Salary Paid/Unpaid:</strong> ${Employee.Paid}</h5>
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@ if(Finaldatetomatch == Employees.todayDate){
                     Swal.fire({
                         position: "center",
                         icon: "success",
-                        title: "Update Salary will come soom",
+                        title: "Update salary will come soom",
                         showConfirmButton: false,
                         timer: 1500,
                     });
@@ -237,63 +237,12 @@ if(Finaldatetomatch == Employees.todayDate){
         }
     }
 
-    GetSalary();
+    GetSallary();
 
 
     return (
         <main className="DashboardMain">
-            <div className="DashboardleftSideBar">
-                <h2>Dashboard</h2>
-                <ul>
-                    <Link to="/Dashboard">
-                        <li>Dashboard</li>
-                    </Link>
-                    <Link to="/Vendor">
-                        <li>Vendor</li>
-                    </Link>
-                    <Link to="/Customer">
-                        <li>Customer</li>
-                    </Link>
-                    <Link to="/Sale">
-                        <li>Sale</li>
-                    </Link>
-                    <Link to="/Purchase">
-                        <li>Purchase</li>
-                    </Link>
-                    <Link to="/Product">
-                        <li>Product</li>
-                    </Link>
-                    <Link to="/Invoice">
-                        <li>Invoice</li>
-                    </Link>
-                    <Link to="/UOM">
-                        <li>UOM</li>
-                    </Link>
-                    <Link to="/Attendance">
-                        <li>Attendance</li>
-                    </Link>
-                    <Link to="/Employee">
-                        <li>Employee</li>
-                    </Link>
-                    <Link to="/Salary">
-                        <li>Salary</li>
-                    </Link>
-                </ul>
-                <div className="login_signup">
-                    <ul>
-                        <Link to="/login">
-                            <li>Login</li>
-                        </Link>
-                        <Link to="/signup">
-                            <li>Signup</li>
-                        </Link>
-                        <Link onClick={logout}>
-                            <li style={{ backgroundColor: "red", color: "white" }}>Logout</li>
-                        </Link>
-                    </ul>
-                </div>
-            </div>
-            <div className="DashboardrightSideBar">
+            <div className="DashboardrightSideBar" style={{marginTop:'-300px'}}>
                 <div className="header">
                     <div className="headerLeftSection">
                         <span id="one" style={{ fontSize: "15px" }}>
@@ -316,9 +265,9 @@ if(Finaldatetomatch == Employees.todayDate){
                     <table >
                         <thead style={{width:'100% !important'}}>
                             <tr>
-                                <th colSpan={2}><span> <Link to={'/Salary'}> <FontAwesomeIcon icon={faCircleArrowLeft} /> Back </Link> </span></th>
-                                <th colSpan={2} >This Month Salary Detail</th>
-                                <th colSpan={2} ><span> <Link to={'/PreviousSalary'}> <FontAwesomeIcon icon={faCircleArrowLeft} /> See more </Link> </span></th>
+                                <th colSpan={2}><span> <Link to={'/SeeSalary'}> <FontAwesomeIcon icon={faCircleArrowLeft} /> Back </Link> </span></th>
+                                <th colSpan={2} > <input type="text" onChange={(e)=> SetDateInput(e.target.value)} placeholder="8/30/2024"/> </th>
+                                <th colSpan={2} ><span>  </span></th>
                             </tr>
                             <tr
                                 className="table-headers"
@@ -326,9 +275,9 @@ if(Finaldatetomatch == Employees.todayDate){
                             >
                                 <th>Employee Name</th>
                                 <th>Employee Gender</th>
+                                <th>Employee Position</th>
                                 <th>Salary</th>
-                                <th>Salary Date</th>
-                                <th>Paid / UnPaid</th>
+                                <th>Attendance Date</th>
                             </tr>
                         </thead>
                         {/* <tbody style={{ overflow: 'scroll', height: '100px !important' }} id='TableBody' > */}

@@ -28,6 +28,7 @@ import EditEmployees from './Pages/EditEmployees/EditEmployees';
 import SeeAttendance from './Pages/SeeAttendance/SeeAttandence';
 import PreviousAttendance from './Pages/PreviousAttendance/PreviousAttendance';
 import SeeSalary from './Pages/SeeSalary/SeeSalary';
+import PreviousSalary from './Pages/PreviousSalary/PreviousSalary';
 export function LoginComponent() {
   return window.location = "/Login"
 }
@@ -76,6 +77,7 @@ export default function App() {
 
       <Route path="/Salary" element={<Salary />} />
       <Route path="/SeeSalary" element={<SeeSalary />} />
+      <Route path="/PreviousSalary" element={<PreviousSalary />} />
 
 
     </Routes>

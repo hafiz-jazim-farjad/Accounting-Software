@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { auth } from "../../Firebase/Firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { addDoc, collection, query, getDocs, getDoc, doc } from "firebase/firestore";
+import { addDoc, collection, query, getDocs } from "firebase/firestore";
 import { db } from "../../Firebase/Firebase";
 import Swal from "sweetalert2";
 
 export default function Salary() {
     const [name, setName] = useState(""); // authorized user name
-    
     const [employeeOptions, setEmployeeOptions] = useState([]); // employee options for dropdown
-    
     const [salary, SetSalary] = useState(""); // attendance status
     const [todayDate, setTodayDate] = useState(""); // current date
     const [employeeGender, setEmployeeGender] = useState(""); // selected employee gender
@@ -19,7 +17,9 @@ export default function Salary() {
     const [employeeposition, setemployeeposition] = useState(""); // selected employee position
     const [employeeId, setemployeeId] = useState(""); // selected employee position
     const [Paid, SetPaid] = useState(""); // selected employee position
-    
+    const [EmployeeFullName, SetEmployeeFullName] = useState(""); // selected employee position
+    const [EmployeeSalary, SetEmployeeSalary] = useState(""); // selected employee position
+    const [time, setTime] = useState(new Date());
 
     useEffect(() => {
         // Set current date
@@ -41,7 +41,6 @@ export default function Salary() {
         return () => unsubscribe(); // Clean up subscription
     }, []);
 
-    // Update time every second
     useEffect(() => {
         const updateTime = () => {
             setTime(new Date());
@@ -51,14 +50,48 @@ export default function Salary() {
         return () => clearInterval(intervalId);
     }, []);
 
-    const [time, setTime] = useState(new Date());
+    useEffect(() => {
+        const fetchEmployeeData = async () => {
+            try {
+                const q = query(collection(db, "Employees"));
+                const querySnapshot = await getDocs(q);
+                const options = [];
 
-    const formatTime = () => {
-        const isHours = time.getHours().toString().padStart(2, "0");
-        const isMinutes = time.getMinutes().toString().padStart(2, "0");
-        const isSeconds = time.getSeconds().toString().padStart(2, "0");
-        return `${isHours} : ${isMinutes} : ${isSeconds}`;
-    };
+                querySnapshot.forEach((doc) => {
+                    const employee = doc.data();
+                    const employeeName1 = employee.Name;
+                    const EmployeePosition = employee.EmployeePosition;
+                    const employeegender = employee.EmployeeGender;
+                    const employeeId = employee.EmployeeId;
+                    const Salary = employee.Salary;
+                    SetSalary(Salary)
+                    setEmployeeGender(employeegender);
+                    setemployeeposition(EmployeePosition);
+                    setemployeeId(employeeId);
+
+                    if (!options.some(option => option.value === employeeName1)) {
+                        options.push({ value: employeeName1, salary: Salary, label: `${employeeName1} = ${EmployeePosition}` });
+                    }
+                    
+                    console.log(employeeName, 'employeeName');
+                    console.log(employee.Name, 'employee.Name');
+                    SetEmployeeFullName({ name: employee.Name, salary: employee.Salary });
+                });
+
+                setEmployeeOptions(options);
+            } catch (error) {
+                console.error("Error fetching employee data: ", error);
+            }
+        };
+
+        fetchEmployeeData();
+    }, []);
+
+    useEffect(() => {
+        if (employeeName === EmployeeFullName.name) {
+            SetEmployeeSalary(EmployeeFullName.salary);
+        }
+    }, [employeeName, EmployeeFullName]);
 
     const handleLogout = () => {
         signOut(auth)
@@ -70,72 +103,32 @@ export default function Salary() {
             });
     };
 
-    const fetchEmployeeData = async () => {
+    const AddSalary = async () => {
         try {
-            const q = query(collection(db, "Employees"));
-            const querySnapshot = await getDocs(q);
-            const options = [];
-
-            querySnapshot.forEach((doc) => {
-                const employee = doc.data();
-                const employeeName = employee.Name;
-                const EmployeePosition = employee.EmployeePosition;
-                const employeegender = employee.EmployeeGender;
-                const employeeId = employee.EmployeeId;
-                setEmployeeGender(employeegender)
-                setemployeeposition(EmployeePosition)
-                setemployeeId(employeeId)
-                if (!options.some(option => option.value === employeeName)) {
-                    options.push({ value: employeeName, label: `${employeeName} = ${EmployeePosition}` });
-                }
+            const docRef = await addDoc(collection(db, "Salary"), {
+                employeeName: employeeName,
+                todayDate: todayDate,
+                employeeGender: employeeGender,
+                employeeposition: employeeposition,
+                employeeId: employeeId,
+                Paid: Paid,
+                salary: salary,
             });
 
-            setEmployeeOptions(options);
-        } catch (error) {
-            console.error("Error fetching employee data: ", error);
+            console.log("Document written with ID: ", docRef.id);
+            Swal.fire({
+                title: "Salary Added Successfully",
+                text: "Salary Added",
+                icon: "success",
+                showConfirmButton: false,
+                showCancelButton: false,
+            });
+            setTimeout(() => {
+                window.location = "/SeeSalary";
+            }, 2000);
+        } catch (e) {
+            console.error("Error adding document: ", e);
         }
-    };
-
-    useEffect(() => {
-        fetchEmployeeData();
-    }, []);
-
-    const AddSalary = async () => {
-        // if (name && todayDate && employeeGender && employeeName && attendance) {
-            try {
-                const docRef = await addDoc(collection(db, "Salary"), {
-                    employeeName:employeeName,
-                    todayDate:todayDate,
-                    employeeGender:employeeGender,
-                    salary:salary,
-                    employeeposition:employeeposition,
-                    employeeId:employeeId,
-                    Paid:Paid
-                });
-
-                console.log("Document written with ID: ", docRef.id);
-                Swal.fire({
-                    title: "Salary Added Successfully",
-                    text: "Salary Added",
-                    icon: "success",
-                    showConfirmButton: false,
-                    showCancelButton: false,
-                });
-                setTimeout(() => {
-                    window.location = "/SeeSalary";
-                }, 2000);
-            } catch (e) {
-                console.error("Error adding document: ", e);
-            }
-        // } else {
-        //     Swal.fire({
-        //         title: "Please Fill All The Credentials",
-        //         text: "Without Filling All The Credentials You Will Not Be Able To Add Employee Data",
-        //         icon: "error",
-        //         showConfirmButton: false,
-        //         showCancelButton: false,
-        //     });
-        // }
     };
 
     return (
@@ -197,7 +190,7 @@ export default function Salary() {
                         <span id="one" style={{ fontSize: "15px" }}>
                             {/* {fullFinalDate} */} date here
                         </span>
-                        <span id="two">Time: {formatTime()}</span>
+                        <span id="two">Time: </span>
                         <span id="three">{name}</span>
                     </div>
                     <div className="headerRightSection">
@@ -226,20 +219,17 @@ export default function Salary() {
                             >
                                 <option value="" disabled selected>Select Employee</option>
                                 {employeeOptions.map(option => (
-                                    <option key={option.value} value={option.value}>
+                                    <option key={option.value} value={option.value} >
                                         {option.label}
                                     </option>
                                 ))}
                             </select>
-                            <input
-                                name="Attendance"
-                                className="input"
-                                placeholder="Enter The Salary Amount"
-                                onChange={(e) => SetSalary(e.target.value)}
-                            />
+
+                            <input type="text" value={EmployeeSalary} className="input"  />
+                            
                         </div>
                         <div className="formGroup">
-                        <select
+                            <select
                                 name="Attendance"
                                 className="input"
                                 onChange={(e) => SetPaid(e.target.value)}
@@ -255,7 +245,7 @@ export default function Salary() {
                                 justifyContent: "center",
                                 alignItems: "center",
                                 width: "100%",
-                                columnGap:'10px'
+                                columnGap: '10px'
                             }}
                         >
                             <button
@@ -271,7 +261,7 @@ export default function Salary() {
                                 Add Salary
                             </button>
                             <p> </p>
-                            <Link to="/SeeAttandance">
+                            <Link to="/SeeSalary">
                                 <button
                                     type="button"
                                     style={{
