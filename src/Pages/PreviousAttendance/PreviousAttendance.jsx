@@ -24,8 +24,9 @@ import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 
-export default function SeeAttendance() {
+export default function PreviousAttendance() {
     const [name, setName] = useState("");
+    const [DateInput, SetDateInput] = useState("");
 
 
     useEffect(() => {
@@ -127,10 +128,9 @@ export default function SeeAttendance() {
         querySnapshot.forEach((doc) => {
             const Employees = doc.data();
             const rowId = doc.id;
-            const date = new Date();
-            const Finaldatetomatch = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-if(Finaldatetomatch == Employees.todayDate){
+if(DateInput == Employees.todayDate){
 
+    
     rows += `
     <tr data-id="${rowId}">
     <td>${Employees.employeeName}</td>  
@@ -140,7 +140,8 @@ if(Finaldatetomatch == Employees.todayDate){
     <td className="mobile-header">${Employees.todayDate}</td>
     </tr>
     `;
-}
+    }
+
 });
 
         // Insert rows into the table body
@@ -241,58 +242,7 @@ if(Finaldatetomatch == Employees.todayDate){
 
     return (
         <main className="DashboardMain">
-            <div className="DashboardleftSideBar">
-                <h2>Dashboard</h2>
-                <ul>
-                    <Link to="/Dashboard">
-                        <li>Dashboard</li>
-                    </Link>
-                    <Link to="/Vendor">
-                        <li>Vendor</li>
-                    </Link>
-                    <Link to="/Customer">
-                        <li>Customer</li>
-                    </Link>
-                    <Link to="/Sale">
-                        <li>Sale</li>
-                    </Link>
-                    <Link to="/Purchase">
-                        <li>Purchase</li>
-                    </Link>
-                    <Link to="/Product">
-                        <li>Product</li>
-                    </Link>
-                    <Link to="/Invoice">
-                        <li>Invoice</li>
-                    </Link>
-                    <Link to="/UOM">
-                        <li>UOM</li>
-                    </Link>
-                    <Link to="/Attendance">
-                        <li>Attendance</li>
-                    </Link>
-                    <Link to="/Employee">
-                        <li>Employee</li>
-                    </Link>
-                    <Link to="/Salary">
-                        <li>Salary</li>
-                    </Link>
-                </ul>
-                <div className="login_signup">
-                    <ul>
-                        <Link to="/login">
-                            <li>Login</li>
-                        </Link>
-                        <Link to="/signup">
-                            <li>Signup</li>
-                        </Link>
-                        <Link onClick={logout}>
-                            <li style={{ backgroundColor: "red", color: "white" }}>Logout</li>
-                        </Link>
-                    </ul>
-                </div>
-            </div>
-            <div className="DashboardrightSideBar">
+            <div className="DashboardrightSideBar" style={{marginTop:'-300px'}}>
                 <div className="header">
                     <div className="headerLeftSection">
                         <span id="one" style={{ fontSize: "15px" }}>
@@ -315,9 +265,9 @@ if(Finaldatetomatch == Employees.todayDate){
                     <table >
                         <thead style={{width:'100% !important'}}>
                             <tr>
-                                <th colSpan={2}><span> <Link to={'/Attendance'}> <FontAwesomeIcon icon={faCircleArrowLeft} /> Back </Link> </span></th>
-                                <th colSpan={2} > Attendance Detail</th>
-                                <th colSpan={2} ><span> <Link to={'/PreviousAttendance'}> <FontAwesomeIcon icon={faCircleArrowLeft} /> See more </Link> </span></th>
+                                <th colSpan={2}><span> <Link to={'/SeeAttandance'}> <FontAwesomeIcon icon={faCircleArrowLeft} /> Back </Link> </span></th>
+                                <th colSpan={2} > <input type="text" onChange={(e)=> SetDateInput(e.target.value)} placeholder="8/30/2024"/> </th>
+                                <th colSpan={2} ><span>  </span></th>
                             </tr>
                             <tr
                                 className="table-headers"

@@ -275,7 +275,6 @@ const Invoice = () => {
   
  
                // </tr>
-
     SetSpecificSalesData([
       Name,
       DeliveryDate,
@@ -291,7 +290,8 @@ const Invoice = () => {
 
   // Assuming you're using React, this logs the updated SpecificSalesData whenever it changes
 
-  
+
+
   useEffect(() => {
     if (SpecificSalesData && SpecificSalesData.length > 0) {
         const Name = SpecificSalesData[0];
@@ -303,11 +303,13 @@ const Invoice = () => {
         const Quantity = SpecificSalesData[6];
         const Price = SpecificSalesData[7];
         const AdditionalInfo = SpecificSalesData[8];
-        
-        // Calculate the total
-        const calulateTotal = Quantity * Price;
-        
-        // Set innerHTML with a script for removeItem function
+        var incnum = 0
+        var tot = () =>{
+          ++incnum
+          var total = Price * Quantity + `${incnum}`
+          return total
+          }
+        var num = 0
         document.getElementById("additems").innerHTML = `
             <tr id="row-${count}">
                 <td>${count - 2}</td>
@@ -320,7 +322,7 @@ const Invoice = () => {
                 <td>
                     <input type="number" class="form-control" value="${Price}" id="price" disabled/>
                 </td>
-                <td>${calulateTotal}</td>
+                <td>${tot()}</td>
                 <td class="hide-on-capture">  
                     <button
                         class="btn btn-danger"
@@ -684,7 +686,7 @@ console.log(specificid);
                     </button>
                   </div>
                   <div className="d-flex justify-content-end mt-4">
-                    <h3>Subtotal: ${TotalPrice}</h3>
+                    <h3>Subtotal: ${Price * Quantity}</h3>
                   </div>
                   <div className="mt-5">
                     <h5>Payment Information:</h5>
